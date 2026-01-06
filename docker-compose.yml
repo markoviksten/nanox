@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   lightrag:
     container_name: lightrag
@@ -19,3 +21,47 @@ services:
     restart: unless-stopped
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    networks:
+      - stack-net
+
+  agent:
+    build: ./agent
+    container_name: lightrag-agent
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./agent/data:/data
+    depends_on:
+      - lightrag
+    restart: unless-stopped
+    networks:
+      - stack-net
+    environment:
+      - LIGHTRAG_URL=http://lightrag:9621/query  # Muutettu käyttämään konttien sisäistä hostnamea
+      - API_KEY=your-secure-api-key-here-marko
+      - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc2Nzc3MDA3Mywicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.RPHPrGxQ2T70-vECbyt7Rurllx-7HMO01eA-tPjeW48
+  enduser-app:
+    build: ./apps/enduser-app
+    container_name: enduser-app
+    ports:
+      - "3000:80"
+    depends_on:
+      - agent
+    restart: unless-stopped
+    networks:
+      - stack-net
+
+  admin-app:
+    build: ./apps/admin-app
+    container_name: admin-app
+    ports:
+      - "3001:80"
+    depends_on:
+      - agent
+    restart: unless-stopped
+    networks:
+      - stack-net
+
+networks:
+  stack-net:
+    driver: bridge
