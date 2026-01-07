@@ -7,7 +7,7 @@ import requests
 import os
 
 # -------------------------------------------------
-# App
+# App config
 # -------------------------------------------------
 
 AGENT_ID = os.getenv("AGENT_ID", "agent-unknown")
@@ -15,18 +15,21 @@ LIGHTRAG_URL = os.getenv("LIGHTRAG_URL", "http://lightrag:9621/query")
 API_KEY = os.getenv("API_KEY", "")
 BEARER_TOKEN = os.getenv("BEARER_TOKEN", "")
 
+# CORS: sallii kaikki alkuperät (voit rajata tuotannossa)
+ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
+
 app = FastAPI(
     title=f"Nano Agent API ({AGENT_ID})",
-    version="0.3.0"
+    version="0.3.1"
 )
 
 # -------------------------------------------------
-# CORS
+# CORS middleware (ennen kaikkia routeja)
 # -------------------------------------------------
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS if ALLOWED_ORIGINS != ["*"] else ["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -53,10 +56,8 @@ class QueryResponse(BaseModel):
     references: Optional[List[Reference]] = []
 
 # -------------------------------------------------
-# State (agent-kohtainen)
+# LightRAG headers
 # -------------------------------------------------
-
-QUERY_LOG: List[QueryResponse] = []
 
 LIGHTRAG_HEADERS = {
     "Authorization": f"Bearer {BEARER_TOKEN}",
@@ -64,6 +65,12 @@ LIGHTRAG_HEADERS = {
     "Content-Type": "application/json",
     "accept": "application/json"
 }
+
+# -------------------------------------------------
+# State (agent-kohtainen, muistissa vain tämän instanssin)
+# -------------------------------------------------
+
+QUERY_LOG: List[QueryResponse] = []
 
 # -------------------------------------------------
 # Endpoints
