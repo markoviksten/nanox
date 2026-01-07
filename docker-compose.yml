@@ -1,13 +1,13 @@
 version: "3.9"
 
 services:
-  # --------------------------------------------------
+  # ==================================================
   # LightRAG Nano instanssit (5 kpl)
-  # --------------------------------------------------
+  # ==================================================
 
   lightrag-nano-1:
-    container_name: lightrag-nano-1
     image: ghcr.io/hkuds/lightrag:latest
+    container_name: lightrag-nano-1
     build:
       context: .
       dockerfile: Dockerfile
@@ -27,8 +27,8 @@ services:
     networks: [stack-net]
 
   lightrag-nano-2:
-    container_name: lightrag-nano-2
     image: ghcr.io/hkuds/lightrag:latest
+    container_name: lightrag-nano-2
     ports: ["9622:9621"]
     volumes:
       - ./data/nano2/rag_storage:/app/data/rag_storage
@@ -43,8 +43,8 @@ services:
     networks: [stack-net]
 
   lightrag-nano-3:
-    container_name: lightrag-nano-3
     image: ghcr.io/hkuds/lightrag:latest
+    container_name: lightrag-nano-3
     ports: ["9623:9621"]
     volumes:
       - ./data/nano3/rag_storage:/app/data/rag_storage
@@ -59,8 +59,8 @@ services:
     networks: [stack-net]
 
   lightrag-nano-4:
-    container_name: lightrag-nano-4
     image: ghcr.io/hkuds/lightrag:latest
+    container_name: lightrag-nano-4
     ports: ["9624:9621"]
     volumes:
       - ./data/nano4/rag_storage:/app/data/rag_storage
@@ -75,8 +75,8 @@ services:
     networks: [stack-net]
 
   lightrag-nano-5:
-    container_name: lightrag-nano-5
     image: ghcr.io/hkuds/lightrag:latest
+    container_name: lightrag-nano-5
     ports: ["9625:9621"]
     volumes:
       - ./data/nano5/rag_storage:/app/data/rag_storage
@@ -90,9 +90,9 @@ services:
     extra_hosts: ["host.docker.internal:host-gateway"]
     networks: [stack-net]
 
-  # --------------------------------------------------
+  # ==================================================
   # Nano Agentit (5 kpl, 1:1 LightRAGien kanssa)
-  # --------------------------------------------------
+  # ==================================================
 
   agent-1:
     build: ./agent
@@ -102,9 +102,11 @@ services:
       - ./agent/data/agent1:/data
     depends_on: [lightrag-nano-1]
     environment:
+      - AGENT_ID=agent-1
       - LIGHTRAG_URL=http://lightrag-nano-1:9621/query
+      - ALLOWED_ORIGINS=*
       - API_KEY=your-secure-api-key-here-marko
-      - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc2Nzk1MzEzNywicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.xd8t9VzNgfISInEvMRXm6oT45pIHBsQFFj0DMQ-BM2M
+      - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
     restart: unless-stopped
     networks: [stack-net]
 
@@ -116,9 +118,11 @@ services:
       - ./agent/data/agent2:/data
     depends_on: [lightrag-nano-2]
     environment:
+      - AGENT_ID=agent-2
       - LIGHTRAG_URL=http://lightrag-nano-2:9621/query
+      - ALLOWED_ORIGINS=*
       - API_KEY=your-secure-api-key-here-marko
-      - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc2Nzk1MzEzNywicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.xd8t9VzNgfISInEvMRXm6oT45pIHBsQFFj0DMQ-BM2M
+      - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
     restart: unless-stopped
     networks: [stack-net]
 
@@ -130,9 +134,11 @@ services:
       - ./agent/data/agent3:/data
     depends_on: [lightrag-nano-3]
     environment:
+      - AGENT_ID=agent-3
       - LIGHTRAG_URL=http://lightrag-nano-3:9621/query
+      - ALLOWED_ORIGINS=*
       - API_KEY=your-secure-api-key-here-marko
-      - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc2Nzk1MzEzNywicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.xd8t9VzNgfISInEvMRXm6oT45pIHBsQFFj0DMQ-BM2M
+      - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
     restart: unless-stopped
     networks: [stack-net]
 
@@ -144,9 +150,11 @@ services:
       - ./agent/data/agent4:/data
     depends_on: [lightrag-nano-4]
     environment:
+      - AGENT_ID=agent-4
       - LIGHTRAG_URL=http://lightrag-nano-4:9621/query
+      - ALLOWED_ORIGINS=*
       - API_KEY=your-secure-api-key-here-marko
-      - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc2Nzk1MzEzNywicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.xd8t9VzNgfISInEvMRXm6oT45pIHBsQFFj0DMQ-BM2M
+      - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
     restart: unless-stopped
     networks: [stack-net]
 
@@ -158,15 +166,17 @@ services:
       - ./agent/data/agent5:/data
     depends_on: [lightrag-nano-5]
     environment:
+      - AGENT_ID=agent-5
       - LIGHTRAG_URL=http://lightrag-nano-5:9621/query
+      - ALLOWED_ORIGINS=*
       - API_KEY=your-secure-api-key-here-marko
-      - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc2Nzk1MzEzNywicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.xd8t9VzNgfISInEvMRXm6oT45pIHBsQFFj0DMQ-BM2M
+      - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
     restart: unless-stopped
     networks: [stack-net]
 
-  # --------------------------------------------------
-  # UI:t (kytketty agent-1:een oletuksena)
-  # --------------------------------------------------
+  # ==================================================
+  # UI:t (kytketty agent-1:een)
+  # ==================================================
 
   enduser-app:
     build: ./apps/enduser-app
