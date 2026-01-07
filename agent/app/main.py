@@ -6,25 +6,36 @@ from datetime import datetime
 import requests
 import os
 
+# -------------------------------------------------
+# App
+# -------------------------------------------------
+
+AGENT_ID = os.getenv("AGENT_ID", "agent-unknown")
+LIGHTRAG_URL = os.getenv("LIGHTRAG_URL", "http://lightrag:9621/query")
+API_KEY = os.getenv("API_KEY", "")
+BEARER_TOKEN = os.getenv("BEARER_TOKEN", "")
+
 app = FastAPI(
-    title="Nano Agent API",
-    version="0.2.0"
+    title=f"Nano Agent API ({AGENT_ID})",
+    version="0.3.0"
 )
 
-# ---------
-# CORS (KORJAUS OPTIONS 405 -ONGELMAAN)
-# ---------
+# -------------------------------------------------
+# CORS
+# -------------------------------------------------
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],        # kehityksessä ok, rajaa prodissa
+    allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],        # POST, OPTIONS, GET, jne
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# ---------
-# Request / Response -mallit
-# ---------
+# -------------------------------------------------
+# Models
+# -------------------------------------------------
+
 class Reference(BaseModel):
     reference_id: str
     file_path: str
@@ -34,23 +45,18 @@ class QueryRequest(BaseModel):
     question: str
 
 class QueryResponse(BaseModel):
+    agent_id: str
     question: str
     timestamp: str
     status: str
     text: str
     references: Optional[List[Reference]] = []
 
-# ---------
-# In-memory log (korvataan myöhemmin SQLitellä)
-# ---------
-QUERY_LOG: List[QueryResponse] = []
+# -------------------------------------------------
+# State (agent-kohtainen)
+# -------------------------------------------------
 
-# ---------
-# LightRAG URL + auth (ympäristömuuttujat)
-# ---------
-LIGHTRAG_URL = os.getenv("LIGHTRAG_URL", "http://lightrag:9621/query")
-API_KEY = os.getenv("API_KEY", "")
-BEARER_TOKEN = os.getenv("BEARER_TOKEN", "")
+QUERY_LOG: List[QueryResponse] = []
 
 LIGHTRAG_HEADERS = {
     "Authorization": f"Bearer {BEARER_TOKEN}",
@@ -59,12 +65,17 @@ LIGHTRAG_HEADERS = {
     "accept": "application/json"
 }
 
-# ---------
+# -------------------------------------------------
 # Endpoints
-# ---------
+# -------------------------------------------------
+
 @app.get("/health")
 def health():
-    return {"status": "ok"}
+    return {
+        "status": "ok",
+        "agent_id": AGENT_ID,
+        "lightrag_url": LIGHTRAG_URL
+    }
 
 @app.post("/query", response_model=QueryResponse)
 def query(req: QueryRequest):
@@ -76,17 +87,16 @@ def query(req: QueryRequest):
             timeout=60.0
         )
         resp.raise_for_status()
-        resp_json = resp.json()
+        data = resp.json()
 
-        rag_text = resp_json.get("response", "No answer")
-
+        rag_text = data.get("response", "No answer")
         rag_references = [
             Reference(
                 reference_id=ref.get("reference_id", ""),
                 file_path=ref.get("file_path", ""),
                 content=ref.get("content")
             )
-            for ref in resp_json.get("references", [])
+            for ref in data.get("references", [])
         ]
 
         status = "answered"
@@ -97,6 +107,7 @@ def query(req: QueryRequest):
         status = "failed"
 
     entry = QueryResponse(
+        agent_id=AGENT_ID,
         question=req.question,
         timestamp=datetime.utcnow().isoformat(),
         status=status,

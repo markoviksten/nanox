@@ -11,8 +11,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      tags:
-        - ghcr.io/hkuds/lightrag:latest
     ports:
       - "9621:9621"
     volumes:
@@ -20,143 +18,165 @@ services:
       - ./data/nano1/inputs:/app/data/inputs
       - ./config.ini:/app/config.ini
       - ./.env:/app/.env
-    env_file:
-      - .env
+    env_file: [.env]
     environment:
       - INSTANCE_ID=nano-1
     restart: unless-stopped
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    networks:
-      - stack-net
+    networks: [stack-net]
 
   lightrag-nano-2:
     container_name: lightrag-nano-2
     image: ghcr.io/hkuds/lightrag:latest
-    ports:
-      - "9622:9621"
+    ports: ["9622:9621"]
     volumes:
       - ./data/nano2/rag_storage:/app/data/rag_storage
       - ./data/nano2/inputs:/app/data/inputs
       - ./config.ini:/app/config.ini
       - ./.env:/app/.env
-    env_file:
-      - .env
+    env_file: [.env]
     environment:
       - INSTANCE_ID=nano-2
     restart: unless-stopped
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    networks:
-      - stack-net
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    networks: [stack-net]
 
   lightrag-nano-3:
     container_name: lightrag-nano-3
     image: ghcr.io/hkuds/lightrag:latest
-    ports:
-      - "9623:9621"
+    ports: ["9623:9621"]
     volumes:
       - ./data/nano3/rag_storage:/app/data/rag_storage
       - ./data/nano3/inputs:/app/data/inputs
       - ./config.ini:/app/config.ini
       - ./.env:/app/.env
-    env_file:
-      - .env
+    env_file: [.env]
     environment:
       - INSTANCE_ID=nano-3
     restart: unless-stopped
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    networks:
-      - stack-net
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    networks: [stack-net]
 
   lightrag-nano-4:
     container_name: lightrag-nano-4
     image: ghcr.io/hkuds/lightrag:latest
-    ports:
-      - "9624:9621"
+    ports: ["9624:9621"]
     volumes:
       - ./data/nano4/rag_storage:/app/data/rag_storage
       - ./data/nano4/inputs:/app/data/inputs
       - ./config.ini:/app/config.ini
       - ./.env:/app/.env
-    env_file:
-      - .env
+    env_file: [.env]
     environment:
       - INSTANCE_ID=nano-4
     restart: unless-stopped
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    networks:
-      - stack-net
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    networks: [stack-net]
 
   lightrag-nano-5:
     container_name: lightrag-nano-5
     image: ghcr.io/hkuds/lightrag:latest
-    ports:
-      - "9625:9621"
+    ports: ["9625:9621"]
     volumes:
       - ./data/nano5/rag_storage:/app/data/rag_storage
       - ./data/nano5/inputs:/app/data/inputs
       - ./config.ini:/app/config.ini
       - ./.env:/app/.env
-    env_file:
-      - .env
+    env_file: [.env]
     environment:
       - INSTANCE_ID=nano-5
     restart: unless-stopped
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    networks:
-      - stack-net
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    networks: [stack-net]
 
   # --------------------------------------------------
-  # Agent (kytketään yhteen LightRAG-instanssiin)
+  # Nano Agentit (5 kpl, 1:1 LightRAGien kanssa)
   # --------------------------------------------------
 
-  agent:
+  agent-1:
     build: ./agent
-    container_name: lightrag-agent
-    ports:
-      - "9000:9000"
+    container_name: nano-agent-1
+    ports: ["9001:9000"]
     volumes:
-      - ./agent/data:/data
-    depends_on:
-      - lightrag-nano-1
-    restart: unless-stopped
-    networks:
-      - stack-net
+      - ./agent/data/agent1:/data
+    depends_on: [lightrag-nano-1]
     environment:
-      # 👉 Oletuksena yksi Nano (voit vaihtaa tai tehdä routingin)
       - LIGHTRAG_URL=http://lightrag-nano-1:9621/query
       - API_KEY=your-secure-api-key-here-marko
-      - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc2Nzc3MDA3Mywicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.RPHPrGxQ2T70-vECbyt7Rurllx-7HMO01eA-tPjeW48
+      - BEARER_TOKEN=your-token
+    restart: unless-stopped
+    networks: [stack-net]
+
+  agent-2:
+    build: ./agent
+    container_name: nano-agent-2
+    ports: ["9002:9000"]
+    volumes:
+      - ./agent/data/agent2:/data
+    depends_on: [lightrag-nano-2]
+    environment:
+      - LIGHTRAG_URL=http://lightrag-nano-2:9621/query
+      - API_KEY=your-secure-api-key-here-marko
+      - BEARER_TOKEN=your-token
+    restart: unless-stopped
+    networks: [stack-net]
+
+  agent-3:
+    build: ./agent
+    container_name: nano-agent-3
+    ports: ["9003:9000"]
+    volumes:
+      - ./agent/data/agent3:/data
+    depends_on: [lightrag-nano-3]
+    environment:
+      - LIGHTRAG_URL=http://lightrag-nano-3:9621/query
+    restart: unless-stopped
+    networks: [stack-net]
+
+  agent-4:
+    build: ./agent
+    container_name: nano-agent-4
+    ports: ["9004:9000"]
+    volumes:
+      - ./agent/data/agent4:/data
+    depends_on: [lightrag-nano-4]
+    environment:
+      - LIGHTRAG_URL=http://lightrag-nano-4:9621/query
+    restart: unless-stopped
+    networks: [stack-net]
+
+  agent-5:
+    build: ./agent
+    container_name: nano-agent-5
+    ports: ["9005:9000"]
+    volumes:
+      - ./agent/data/agent5:/data
+    depends_on: [lightrag-nano-5]
+    environment:
+      - LIGHTRAG_URL=http://lightrag-nano-5:9621/query
+    restart: unless-stopped
+    networks: [stack-net]
 
   # --------------------------------------------------
-  # UI:t
+  # UI:t (kytketty agent-1:een oletuksena)
   # --------------------------------------------------
 
   enduser-app:
     build: ./apps/enduser-app
     container_name: enduser-app
-    ports:
-      - "3000:80"
-    depends_on:
-      - agent
+    ports: ["3000:80"]
+    depends_on: [agent-1]
     restart: unless-stopped
-    networks:
-      - stack-net
+    networks: [stack-net]
 
   admin-app:
     build: ./apps/admin-app
     container_name: admin-app
-    ports:
-      - "3001:80"
-    depends_on:
-      - agent
+    ports: ["3001:80"]
+    depends_on: [agent-1]
     restart: unless-stopped
-    networks:
-      - stack-net
+    networks: [stack-net]
 
 networks:
   stack-net:
