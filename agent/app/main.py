@@ -15,24 +15,21 @@ LIGHTRAG_URL = os.getenv("LIGHTRAG_URL", "http://lightrag:9621/query")
 API_KEY = os.getenv("API_KEY", "")
 BEARER_TOKEN = os.getenv("BEARER_TOKEN", "")
 
-# CORS: sallii kaikki alkuperät (voit rajata tuotannossa)
-ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
-
 app = FastAPI(
     title=f"Nano Agent API ({AGENT_ID})",
-    version="0.3.1"
+    version="0.3.2"
 )
 
 # -------------------------------------------------
-# CORS middleware (ennen kaikkia routeja)
+# ✅ CORS – OIKEA & SELAINYHTEENSOPIVA
 # -------------------------------------------------
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=ALLOWED_ORIGINS if ALLOWED_ORIGINS != ["*"] else ["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=["*"],          # sallii https://*.lovableproject.com
+    allow_credentials=False,      # 🔴 TÄRKEÄ: wildcard + credentials ei sallittu
+    allow_methods=["POST", "OPTIONS", "GET"],
+    allow_headers=["content-type", "accept", "authorization", "x-api-key"],
 )
 
 # -------------------------------------------------
@@ -65,10 +62,6 @@ LIGHTRAG_HEADERS = {
     "Content-Type": "application/json",
     "accept": "application/json"
 }
-
-# -------------------------------------------------
-# State (agent-kohtainen, muistissa vain tämän instanssin)
-# -------------------------------------------------
 
 QUERY_LOG: List[QueryResponse] = []
 
