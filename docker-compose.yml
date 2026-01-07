@@ -104,7 +104,7 @@ services:
     environment:
       - LIGHTRAG_URL=http://lightrag-nano-1:9621/query
       - API_KEY=your-secure-api-key-here-marko
-      - BEARER_TOKEN=your-token
+      - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc2Nzk1MzEzNywicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.xd8t9VzNgfISInEvMRXm6oT45pIHBsQFFj0DMQ-BM2M
     restart: unless-stopped
     networks: [stack-net]
 
@@ -118,7 +118,7 @@ services:
     environment:
       - LIGHTRAG_URL=http://lightrag-nano-2:9621/query
       - API_KEY=your-secure-api-key-here-marko
-      - BEARER_TOKEN=your-token
+      - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc2Nzk1MzEzNywicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.xd8t9VzNgfISInEvMRXm6oT45pIHBsQFFj0DMQ-BM2M
     restart: unless-stopped
     networks: [stack-net]
 
@@ -131,6 +131,8 @@ services:
     depends_on: [lightrag-nano-3]
     environment:
       - LIGHTRAG_URL=http://lightrag-nano-3:9621/query
+      - API_KEY=your-secure-api-key-here-marko
+      - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc2Nzk1MzEzNywicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.xd8t9VzNgfISInEvMRXm6oT45pIHBsQFFj0DMQ-BM2M
     restart: unless-stopped
     networks: [stack-net]
 
@@ -143,6 +145,8 @@ services:
     depends_on: [lightrag-nano-4]
     environment:
       - LIGHTRAG_URL=http://lightrag-nano-4:9621/query
+      - API_KEY=your-secure-api-key-here-marko
+      - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc2Nzk1MzEzNywicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.xd8t9VzNgfISInEvMRXm6oT45pIHBsQFFj0DMQ-BM2M
     restart: unless-stopped
     networks: [stack-net]
 
@@ -155,6 +159,8 @@ services:
     depends_on: [lightrag-nano-5]
     environment:
       - LIGHTRAG_URL=http://lightrag-nano-5:9621/query
+      - API_KEY=your-secure-api-key-here-marko
+      - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc2Nzk1MzEzNywicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.xd8t9VzNgfISInEvMRXm6oT45pIHBsQFFj0DMQ-BM2M
     restart: unless-stopped
     networks: [stack-net]
 
