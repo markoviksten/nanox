@@ -106,7 +106,7 @@ services:
       - LIGHTRAG_URL=http://lightrag-nano-1:9621/query
       - ALLOWED_ORIGINS=*
       - API_KEY=your-secure-api-key-here-marko
-      - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc2Nzg3NDA4OSwicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.c6MHAMBWm-qIrFYGMTN4xqYDKT6ZmMmyvD400CWANcE
+      - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc2ODAzNzcxMCwicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.FKYgpY2zf3ArE66NsoKuKRPskbFr4TpkPibv9Ta0nkE
     restart: unless-stopped
     networks: [stack-net]
 
@@ -122,7 +122,7 @@ services:
       - LIGHTRAG_URL=http://lightrag-nano-2:9621/query
       - ALLOWED_ORIGINS=*
       - API_KEY=your-secure-api-key-here-marko
-      - BEARER_TOKEN=eyeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc2Nzg3NDA4OSwicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.c6MHAMBWm-qIrFYGMTN4xqYDKT6ZmMmyvD400CWANcE
+      - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc2ODAzNzcxMCwicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.FKYgpY2zf3ArE66NsoKuKRPskbFr4TpkPibv9Ta0nkE
     restart: unless-stopped
     networks: [stack-net]
 
@@ -138,7 +138,7 @@ services:
       - LIGHTRAG_URL=http://lightrag-nano-3:9621/query
       - ALLOWED_ORIGINS=*
       - API_KEY=your-secure-api-key-here-marko
-      - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc2Nzg3NDA4OSwicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.c6MHAMBWm-qIrFYGMTN4xqYDKT6ZmMmyvD400CWANcE
+      - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc2ODAzNzcxMCwicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.FKYgpY2zf3ArE66NsoKuKRPskbFr4TpkPibv9Ta0nkE
     restart: unless-stopped
     networks: [stack-net]
 
@@ -154,7 +154,7 @@ services:
       - LIGHTRAG_URL=http://lightrag-nano-4:9621/query
       - ALLOWED_ORIGINS=*
       - API_KEY=your-secure-api-key-here-marko
-      - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc2Nzg3NDA4OSwicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.c6MHAMBWm-qIrFYGMTN4xqYDKT6ZmMmyvD400CWANcE
+      - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc2ODAzNzcxMCwicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.FKYgpY2zf3ArE66NsoKuKRPskbFr4TpkPibv9Ta0nkE
     restart: unless-stopped
     networks: [stack-net]
 
@@ -170,7 +170,7 @@ services:
       - LIGHTRAG_URL=http://lightrag-nano-5:9621/query
       - ALLOWED_ORIGINS=*
       - API_KEY=your-secure-api-key-here-marko
-      - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc2Nzg3NDA4OSwicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.c6MHAMBWm-qIrFYGMTN4xqYDKT6ZmMmyvD400CWANcE
+      - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc2ODAzNzcxMCwicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.FKYgpY2zf3ArE66NsoKuKRPskbFr4TpkPibv9Ta0nkE
     restart: unless-stopped
     networks: [stack-net]
 
