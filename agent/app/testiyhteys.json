@@ -1,0 +1,143 @@
+{
+  "name": "Testi-yhteys",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "08149cd3-53bc-449b-a8ec-a54a2e68b770",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -432,
+        16
+      ],
+      "id": "a19347c5-5053-40d9-a06b-500888206a79",
+      "name": "Webhook",
+      "webhookId": "08149cd3-53bc-449b-a8ec-a54a2e68b770",
+      "alwaysOutputData": false,
+      "retryOnFail": false
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.text }}\n{{ $json.references[0] }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        48,
+        16
+      ],
+      "id": "c8739f91-0b75-40e2-9f44-86787f4973bd",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://169.51.48.29:9001/query",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "question",
+              "value": "={{ $json.body.message }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -176,
+        16
+      ],
+      "id": "7c53aaf9-1b34-4712-9a95-364a7d14e13f",
+      "name": "HTTP Request"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "169.51.48.29:5678",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0",
+            "accept": "application/json, text/plain, */*",
+            "accept-language": "en-US,en;q=0.5",
+            "accept-encoding": "gzip, deflate, br, zstd",
+            "referer": "http://169.51.48.29:3000/",
+            "content-type": "application/json",
+            "content-length": "104",
+            "origin": "http://169.51.48.29:3000",
+            "connection": "keep-alive",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "cross-site",
+            "priority": "u=0"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "message": "Test message from webhook configuration",
+            "timestamp": "2026-01-07T15:18:56.586Z",
+            "test": true
+          },
+          "webhookUrl": "https://169.51.48.29:5678/webhook/08149cd3-53bc-449b-a8ec-a54a2e68b770",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "9e72ba54-d7d3-4029-af40-456e6540f5e7",
+  "meta": {
+    "instanceId": "af4286bb4d025b2b7615123eae747f09055ede666e0f4cf0a26ff43d89b01294"
+  },
+  "id": "4KjbeQ6q8e8n52nrg2Z7D",
+  "tags": []
+}
