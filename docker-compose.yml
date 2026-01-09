@@ -90,7 +90,7 @@ services:
     extra_hosts: ["host.docker.internal:host-gateway"]
     networks: [stack-net]
 
-lightrag-nano-6:
+  lightrag-nano-6:
     image: ghcr.io/hkuds/lightrag:latest
     container_name: lightrag-nano-6
     ports: ["9626:9621"]
@@ -106,7 +106,7 @@ lightrag-nano-6:
     extra_hosts: ["host.docker.internal:host-gateway"]
     networks: [stack-net]
 
-lightrag-nano-7:
+  lightrag-nano-7:
     image: ghcr.io/hkuds/lightrag:latest
     container_name: lightrag-nano-7
     ports: ["9627:9621"]
@@ -121,10 +121,9 @@ lightrag-nano-7:
     restart: unless-stopped
     extra_hosts: ["host.docker.internal:host-gateway"]
     networks: [stack-net]
-    
 
   # ==================================================
-  # Nano Agentit (5 kpl, 1:1 LightRAGien kanssa)
+  # Nano Agentit (7 kpl)
   # ==================================================
 
   agent-1:
@@ -232,7 +231,7 @@ lightrag-nano-7:
     depends_on: [lightrag-nano-7]
     environment:
       - AGENT_ID=agent-7
-      - LIGHTRAG_URL=htt p://lightrag-nano-7:9621/query
+      - LIGHTRAG_URL=http://lightrag-nano-7:9621/query
       - ALLOWED_ORIGINS=*
       - API_KEY=your-secure-api-key-here-marko
       - BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc2ODAzNzcxMCwicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.FKYgpY2zf3ArE66NsoKuKRPskbFr4TpkPibv9Ta0nkE
@@ -240,7 +239,7 @@ lightrag-nano-7:
     networks: [stack-net]
 
   # ==================================================
-  # UI:t (kytketty agent-1:een)
+  # UI:t
   # ==================================================
 
   enduser-app:
