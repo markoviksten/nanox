@@ -1,0 +1,17 @@
+model_list:
+  - model_name: meta-llama/llama-3-1-8b-instruct
+    litellm_params:
+      model: watsonx/meta-llama/llama-3-1-8b-instruct
+      api_base: ${WATSONX_URL}
+      api_key: ${WATSONX_API_KEY}
+      project_id: ${WATSONX_PROJECT_ID}
+  
+  - model_name: ibm/slate-30m-english-rtrvr
+    litellm_params:
+      model: watsonx/ibm/slate-30m-english-rtrvr
+      api_base: ${WATSONX_URL}
+      api_key: ${WATSONX_API_KEY}
+      project_id: ${WATSONX_PROJECT_ID}
+
+general_settings:
+  master_key: sk-1234
