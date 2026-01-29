@@ -306,6 +306,13 @@ services:
     restart: unless-stopped
     networks: [stack-net]
 
+  nanolab-app:
+    build: ./apps/nanolab-app
+    container_name: nanolab-app
+    ports: ["3033:80"]
+    restart: unless-stopped
+    networks: [stack-net]
+
 networks:
   stack-net:
     driver: bridge
