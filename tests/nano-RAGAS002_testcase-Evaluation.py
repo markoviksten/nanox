@@ -13,7 +13,8 @@ Tapa 1 - Aseta API-avain suoraan tässä koodissa (turvallisin tapa kehityksess�
 # ============================================================================
 
 # OpenAI API-avain (aseta tähän oma avaimesi)
-OPENAI_API_KEY = "...A"
+OPENAI_API_KEY = "..."
+
 
 # LightRAG API asetukset
 LIGHTRAG_ENDPOINT = "http://localhost:9622"
@@ -25,7 +26,7 @@ LIGHTRAG_API_KEY = "your-secure-api-key-here-marko"
 # Testitiedosto
 # TEST_FILE = "nano_2advanced_testcases_aligned.json"
 
-TEST_FILE = "nano_2advanced_testcases_aligned.json"
+TEST_FILE = "Res_TestCases_20260130_055813.json"
 
 # LLM ja Embedding mallit (valinnainen)
 LLM_MODEL = "gpt-4o-mini"
@@ -544,7 +545,7 @@ class RAGASTestRunner:
         
         # Tallenna CSV
         try:
-            csv_file = self.results_dir / f"results_{query_mode}_{timestamp}.csv"
+            csv_file = self.results_dir / f"Res_FinalReport_{query_mode}_{timestamp}.csv"
             result_df = result.to_pandas()
             result_df.to_csv(csv_file, index=False)
             print(f"   📊 CSV:  {csv_file}")
@@ -552,7 +553,7 @@ class RAGASTestRunner:
             pass
         
         # Tallenna Markdown-raportti
-        md_file = self.results_dir / f"results_{query_mode}_{timestamp}.md"
+        md_file = self.results_dir / f"Res_FinalReport_results_{query_mode}_{timestamp}.md"
         self._save_markdown_report(md_file, result, dataset, query_mode, timestamp, duration, cost_info)
         print(f"   📝 Markdown: {md_file}")
     

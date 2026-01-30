@@ -9,8 +9,7 @@ from datetime import datetime, timedelta
 import random
 
 load_dotenv()
-
-# Lisää token
+#laita oma tokenapikey
 client = OpenAI(api_key="...")
 
 # Token-hinnat (USD per 1M tokenia) - päivitetty 2024
@@ -40,31 +39,33 @@ ENABLE_QUINT_CHUNK = True       # Viiden chunkin kysymykset
 ENABLE_SHORT_FACTUAL = True     # Lyhyet täsmäkysymykset (faktat, määritelmät)
 ENABLE_REASONING = True         # Päättelykysymykset (miksi, miten, syy-seuraus)
 ENABLE_SYNTHESIS = True         # Yhdistelmäkysymykset (monimutkainen synteesi)
+ENABLE_CONTACT_FACTUAL = True   # Yhteystietokysymykset (kuka, missä, yhteystiedot)
 
 # Kysymysten jakauma (prosentit, yhteensä 100%)
 # Määrittää kuinka monta prosenttia kysymyksistä on mitäkin tyyppiä
 DISTRIBUTION = {
-    "short_factual": 30,    # 30% lyhyitä täsmäkysymyksiä
-    "reasoning": 40,        # 40% päättelykysymyksiä
-    "synthesis": 30,        # 30% yhdistelmäkysymyksiä
+    "short_factual": 70,     # Lyhyitä täsmäkysymyksiä
+    "reasoning": 4,         # Päättelykysymyksiä
+    "synthesis": 2,         # Yhdistelmäkysymyksiä
+    "contact_factual": 24,   # Yhteystietokysymyksiä
 }
 
 # Chunk-määrien jakauma (prosentit per chunk-tyyppi)
 # Määrittää montako kysymystä luodaan kullekin chunk-määrälle
 CHUNK_DISTRIBUTION = {
-    "single": 20,    # 20% kysymyksistä yhdestä chunkista
-    "dual": 20,      # 20% kahdesta chunkista
-    "triple": 25,    # 25% kolmesta chunkista
-    "quad": 20,      # 20% neljästä chunkista
-    "quint": 15,     # 15% viidestä chunkista
+    "single": 60,    # kysymyksistä yhdestä chunkista
+    "dual": 20,      # kahdesta chunkista
+    "triple": 5,     # kolmesta chunkista
+    "quad": 2,       # neljästä chunkista
+    "quint": 1,      # viidestä chunkista
 }
 
 # Kokonaismäärä generoitavia kysymyksiä
-TOTAL_QUESTIONS = 50
+TOTAL_QUESTIONS = 22
 
 # Tiedostopolut
 INPUT_FILE = "vdb_chunks.json"
-OUTPUT_FILE = "nano_2advanced_testcases_aligned.json"
+# OUTPUT_FILE luodaan dynaamisesti timestampilla myöhemmin
 
 # ============================================================================
 # KÄYTTÖESIMERKIT (kommentoituna, voit kopioida ylös)
@@ -81,11 +82,13 @@ OUTPUT_FILE = "nano_2advanced_testcases_aligned.json"
 # ENABLE_SHORT_FACTUAL = True
 # ENABLE_REASONING = False
 # ENABLE_SYNTHESIS = False
+# ENABLE_CONTACT_FACTUAL = False
 #
 # DISTRIBUTION = {
 #     "short_factual": 100,
 #     "reasoning": 0,
 #     "synthesis": 0,
+#     "contact_factual": 0,
 # }
 #
 # CHUNK_DISTRIBUTION = {
@@ -98,30 +101,32 @@ OUTPUT_FILE = "nano_2advanced_testcases_aligned.json"
 #
 # TOTAL_QUESTIONS = 30
 
-# ESIMERKKI 2: Vain haastavat monichunk-kysymykset (päättely + synteesi)
-# ----------------------------------------------------------------------
-# ENABLE_SINGLE_CHUNK = False
+# ESIMERKKI 2: Vain yhteystietokysymykset yhdestä chunkista
+# ----------------------------------------------------------
+# ENABLE_SINGLE_CHUNK = True
 # ENABLE_DUAL_CHUNK = False
-# ENABLE_TRIPLE_CHUNK = True
-# ENABLE_QUAD_CHUNK = True
-# ENABLE_QUINT_CHUNK = True
+# ENABLE_TRIPLE_CHUNK = False
+# ENABLE_QUAD_CHUNK = False
+# ENABLE_QUINT_CHUNK = False
 #
 # ENABLE_SHORT_FACTUAL = False
-# ENABLE_REASONING = True
-# ENABLE_SYNTHESIS = True
+# ENABLE_REASONING = False
+# ENABLE_SYNTHESIS = False
+# ENABLE_CONTACT_FACTUAL = True
 #
 # DISTRIBUTION = {
 #     "short_factual": 0,
-#     "reasoning": 50,
-#     "synthesis": 50,
+#     "reasoning": 0,
+#     "synthesis": 0,
+#     "contact_factual": 100,
 # }
 #
 # CHUNK_DISTRIBUTION = {
-#     "single": 0,
+#     "single": 100,
 #     "dual": 0,
-#     "triple": 40,
-#     "quad": 30,
-#     "quint": 30,
+#     "triple": 0,
+#     "quad": 0,
+#     "quint": 0,
 # }
 #
 # TOTAL_QUESTIONS = 20
@@ -137,11 +142,13 @@ OUTPUT_FILE = "nano_2advanced_testcases_aligned.json"
 # ENABLE_SHORT_FACTUAL = True
 # ENABLE_REASONING = True
 # ENABLE_SYNTHESIS = True
+# ENABLE_CONTACT_FACTUAL = True
 #
 # DISTRIBUTION = {
-#     "short_factual": 33,
-#     "reasoning": 33,
-#     "synthesis": 34,
+#     "short_factual": 25,
+#     "reasoning": 25,
+#     "synthesis": 25,
+#     "contact_factual": 25,
 # }
 #
 # CHUNK_DISTRIBUTION = {
@@ -153,34 +160,6 @@ OUTPUT_FILE = "nano_2advanced_testcases_aligned.json"
 # }
 #
 # TOTAL_QUESTIONS = 100
-
-# ESIMERKKI 4: Fokus päättelykysymyksiin 2-3 chunkista
-# ------------------------------------------------------
-# ENABLE_SINGLE_CHUNK = False
-# ENABLE_DUAL_CHUNK = True
-# ENABLE_TRIPLE_CHUNK = True
-# ENABLE_QUAD_CHUNK = False
-# ENABLE_QUINT_CHUNK = False
-#
-# ENABLE_SHORT_FACTUAL = True
-# ENABLE_REASONING = True
-# ENABLE_SYNTHESIS = False
-#
-# DISTRIBUTION = {
-#     "short_factual": 25,
-#     "reasoning": 75,
-#     "synthesis": 0,
-# }
-#
-# CHUNK_DISTRIBUTION = {
-#     "single": 0,
-#     "dual": 50,
-#     "triple": 50,
-#     "quad": 0,
-#     "quint": 0,
-# }
-#
-# TOTAL_QUESTIONS = 40
 
 # ============================================================================
 # Älä muokkaa tästä alaspäin
@@ -201,7 +180,13 @@ When generating test questions and ground truth answers for RAG evaluation:
 # Aseta työhakemisto
 script_dir = Path(__file__).parent.absolute()
 os.chdir(script_dir)
-print(f"Työhakemisto: {script_dir}\n")
+
+# Luo output-tiedostonimi timestampilla
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+OUTPUT_FILE = script_dir / f"Res_TestCases_{timestamp}.json"
+
+print(f"Työhakemisto: {script_dir}")
+print(f"Output tiedosto: {OUTPUT_FILE}\n")
 
 print("="*80)
 print("KONFIGUROITAVA TESTIKYSYMYSTEN GENEROINTI")
@@ -220,6 +205,7 @@ print(f"\nKysymystyypit:")
 print(f"  • Lyhyet täsmäkysymykset:  {'✓ Käytössä' if ENABLE_SHORT_FACTUAL else '✗ Ei käytössä'}")
 print(f"  • Päättelykysymykset:      {'✓ Käytössä' if ENABLE_REASONING else '✗ Ei käytössä'}")
 print(f"  • Yhdistelmäkysymykset:    {'✓ Käytössä' if ENABLE_SYNTHESIS else '✗ Ei käytössä'}")
+print(f"  • Yhteystietokysymykset:   {'✓ Käytössä' if ENABLE_CONTACT_FACTUAL else '✗ Ei käytössä'}")
 print(f"\nJakauma (kysymystyypit):")
 for qtype, pct in DISTRIBUTION.items():
     print(f"  • {qtype}: {pct}%")
@@ -319,6 +305,28 @@ Luo MONIMUTKAINEN YHDISTELMÄKYSYMYS:
 - Vastaus on kattava ja yhdistää useita tietoja (4-8 lausetta)
 """
         num_questions = 1
+        
+    elif question_type == "contact_factual":
+        type_instructions = """
+Luo YHTEYSTIETOKYSYMYS:
+- Kysyy henkilöiden, organisaatioiden, järjestelmien tai palveluiden yhteystietoja
+- Tyypillisiä muotoja: 
+  * "Kuka on X?" / "Kuka hoitaa Y:n?"
+  * "Missä sijaitsee Z?" / "Mistä löytyy A?"
+  * "Mikä on X:n osoite/URL/sähköposti/puhelinnumero?"
+  * "Keneen otan yhteyttä kun...?"
+  * "Missä on tietojärjestelmä/palvelu/toimipiste X?"
+- Vastaus sisältää täsmälliset yhteystiedot (nimi, sijainti, osoite, URL, yhteystiedot jne.)
+- EDELLYTYS: Luo tämä kysymys VAIN jos dokumentissa on:
+  * Henkilönimiä ja rooleja/vastuualueita
+  * Organisaatioiden tai yksiköiden nimiä ja sijainteja
+  * Järjestelmien tai palveluiden nimiä ja osoitteita (URL, verkko-osoite)
+  * Toimipisteiden tai tilojen nimiä ja sijainteja
+  * Puhelinnumeroita, sähköposteja tai muita yhteystietoja
+- Jos dokumentissa EI OLE mitään edellä mainittua, ÄLÄ LUO tätä kysymystä
+- Vastaus 1-3 lausetta
+"""
+        num_questions = 2
     else:
         type_instructions = "Luo kysymys joka sopii annettuun kontekstiin."
         num_questions = 1
@@ -340,7 +348,7 @@ Step-by-Step for Question Generation:
 1. Carefully analyze ALL {num_chunks} document chunk(s) in the Context
 2. Identify information that is relevant for the question type
 3. Create question(s) that REQUIRE information from {chunk_requirement}
-4. Ensure the question matches the specified type (factual/reasoning/synthesis)
+4. Ensure the question matches the specified type (factual/reasoning/synthesis/contact_factual)
 
 Step-by-Step for Ground Truth Generation:
 1. Carefully determine what the question asks
@@ -394,7 +402,7 @@ def generate_test_cases(chunks_group: tuple, question_type: str) -> tuple:
     
     try:
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="gpt-4.1-nano",
             messages=[
                 {"role": "system", "content": ALIGNED_SYSTEM_PROMPT},
                 {"role": "user", "content": prompt}
@@ -447,6 +455,8 @@ if ENABLE_REASONING:
     enabled_types.append("reasoning")
 if ENABLE_SYNTHESIS:
     enabled_types.append("synthesis")
+if ENABLE_CONTACT_FACTUAL:
+    enabled_types.append("contact_factual")
 
 # Normalisoi jakauma (jos jokin tyyppi on disabloitu)
 total_dist = sum(DISTRIBUTION[t] for t in enabled_types)
@@ -572,6 +582,7 @@ final_output = {
             "enable_short_factual": ENABLE_SHORT_FACTUAL,
             "enable_reasoning": ENABLE_REASONING,
             "enable_synthesis": ENABLE_SYNTHESIS,
+            "enable_contact_factual": ENABLE_CONTACT_FACTUAL,
             "distribution": DISTRIBUTION,
             "chunk_distribution": CHUNK_DISTRIBUTION,
         }
@@ -644,7 +655,8 @@ print(f"{'='*80}")
 print(f"LUODAAN MARKDOWN-RAPORTTI")
 print(f"{'='*80}\n")
 
-md_filename = OUTPUT_FILE.replace('.json', '_report.md')
+# Käytä samaa timestampia kuin JSON-tiedostossa
+md_filename = script_dir / f"NanoRagas_TestCases_{timestamp}_report.md"
 md_path = Path(md_filename).absolute()
 
 try:
@@ -653,10 +665,10 @@ try:
         f.write(f"# Testikysymysten Generointiraportti\n\n")
         
         # Metatiedot
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        f.write(f"**Luotu:** {timestamp}\n\n")
+        report_timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        f.write(f"**Luotu:** {report_timestamp}\n\n")
         f.write(f"**Input tiedosto:** `{INPUT_FILE}`\n\n")
-        f.write(f"**Output tiedosto:** `{OUTPUT_FILE}`\n\n")
+        f.write(f"**Output tiedosto:** `{OUTPUT_FILE.name}`\n\n")
         f.write(f"---\n\n")
         
         # Yhteenveto
@@ -673,7 +685,7 @@ try:
         f.write(f"| **Input kustannus** | ${input_cost:.4f} |\n")
         f.write(f"| **Output kustannus** | ${output_cost:.4f} |\n")
         f.write(f"| **Kokonaiskustannus** | **${total_cost:.4f}** |\n")
-        f.write(f"| **Käytetty malli** | gpt-4o-mini |\n\n")
+        f.write(f"| **Käytetty malli** | gpt-4.1-nano |\n\n")
         
         f.write(f"---\n\n")
         
@@ -694,7 +706,8 @@ try:
         f.write(f"|---------------|----------|----------|\n")
         f.write(f"| Short Factual | {'✓' if ENABLE_SHORT_FACTUAL else '✗'} | {DISTRIBUTION.get('short_factual', 0)}% |\n")
         f.write(f"| Reasoning | {'✓' if ENABLE_REASONING else '✗'} | {DISTRIBUTION.get('reasoning', 0)}% |\n")
-        f.write(f"| Synthesis | {'✓' if ENABLE_SYNTHESIS else '✗'} | {DISTRIBUTION.get('synthesis', 0)}% |\n\n")
+        f.write(f"| Synthesis | {'✓' if ENABLE_SYNTHESIS else '✗'} | {DISTRIBUTION.get('synthesis', 0)}% |\n")
+        f.write(f"| Contact Factual | {'✓' if ENABLE_CONTACT_FACTUAL else '✗'} | {DISTRIBUTION.get('contact_factual', 0)}% |\n\n")
         
         f.write(f"---\n\n")
         

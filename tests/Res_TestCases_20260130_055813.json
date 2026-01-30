@@ -1,0 +1,206 @@
+{
+  "test_cases": [
+    {
+      "question": "Miten työaika kirjataan Netvisor-mobiiliapissa?",
+      "ground_truth": "Työaika kirjataan Netvisor-mobiiliapissa valitsemalla vasemman yläkulman kolme viivaa, valitsemalla 'Työaika', kuittamalla työaika klikkaamalla harmaa päivä vihreäksi, ja tarvittaessa tekemällä muutokset päivän kohdalla '+'-painikkeella ja tallentamalla.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Kuinka kauan työaikatiedot on säilytettävä viranomaisille ja työntekijöille nähtäväksi?",
+      "ground_truth": "Työaikatiedot on säilytettävä vähintään kahden vuoden ajan ja ne on näytettävä työntekijälle, työsuojeluviranomaiselle tai työntekijöiden edustajalle pyynnöstä.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mistä linkistä voi tehdä matkalaskun netvisorissa selaimella?",
+      "ground_truth": "Matkalaskun tekeminen Netvisoriin tapahtuu kirjautumalla osoitteeseen https://suomi.netvisor.fi.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mitä tulisi muistaa lisätä matkalaskuun, kun siihen merkitään osallistujat?",
+      "ground_truth": "Selite-kohdassa tulee lisätä osallistuneiden nimet ja yrityksen nimi, jos asiakas tai muita henkilöitä osallistuu kulutukseen tai tarjoiluun.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Miten vuosiloma merkitään Netvisoriin mobiiliapissa?",
+      "ground_truth": "Vuosiloma merkitään mobiiliapissa valitsemalla poissaolon Kirjauslaji ja lisäämällä alkamis- ja päättymispäivämäärä, jonka jälkeen tallennetaan. Vuosiloma käyttää kirjauslajia koodilla 02.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mitä poissaolon kirjauslajiä käytetään vuosiloman merkitsemiseen Netvisorissa?",
+      "ground_truth": "Vuosiloma merkitään Kirjauslaji-valikon koodilla 02.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Kuka hyväksyy matkasuunnitelman ulkomaan matkoille DOC-konsernissa?",
+      "ground_truth": "Ulkomaan matkojen matkasuunnitelman hyväksyy toimitusjohtaja tai hänen erikseen valtuuttamansa esimies.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Miten matkakustannukset korvataan junamatkoissa DOC-konsernissa?",
+      "ground_truth": "Junaliput korvataan Eko-luokan mukaan, ja perustellusta syystä voidaan korvata myös Extra-luokan mukaisesti.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Miten työnantaja korvaa viisumin hankkimiskustannukset?",
+      "ground_truth": "Työnantaja voi korvata viisumin hankkimisen työskentelyvaltioon liittyvät kustannukset veronalaista etua syntymättä, mikäli kyseessä ei ole työtehtävistä johtuva kaksoispassin hankinta.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Milloin maksetaan osapäivärahaa kotimaan matkalla?",
+      "ground_truth": "Osapäiväraha maksetaan vajaalta matkavuorokaudelta, joka kestää vähintään 6 mutta enintään 10 tuntia, ja sitä maksetaan myös, jos työmatkaan käytetty aika ylittää viimeisen täyden matkavuorokauden vähintään 2 tunnilla.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Miten matkasta aiheutuneet ylimääräiset kulut korvataan, jos ne tapahtuvat normaalin työajan ulkopuolella eikä päivärahaa täytetä?",
+      "ground_truth": "Matkasta aiheutuneet ylimääräiset kulut maksetaan vain matkasta ilman päivärahaa, koska tapahtuvat pääosin normaalina työaikana eivätkä täytä kokopäivärahan ehtoja.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Miten työntekijä kirjaa työaikansa Netvisorissa ja mitä hänen tulee tehdä, jos työtuntien aikana tapahtuu muutoksia?",
+      "ground_truth": "Työntekijä kirjaa työaikansa Netvisor-appissa valitsemalla 'Työaika' ja kuittaamalla päivän vihreäksi. Jos työtunteihin tulee muutoksia, hän klikkaa päivän kohdalta '+' ja tekee muutokset tunteihin sekä tallentaa ne. Työaikalaki velvoittaa kirjaamaan tehdyt työtunnit, jotka tulee säilyttää vähintään kaksi vuotta, ja näitä kirjaamisia tehdään viikoittain.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 2
+      }
+    },
+    {
+      "question": "Miten työntekijä kirjaa vuosilomansa Netvisorin mobiili- ja selainversiossa?",
+      "ground_truth": "Työntekijä lisää lomansa Netvisorin mobiiliapissa valitsemalla työaikaseurannan kautta 'Lisää loma tai poissaolo', valitsemalla poissaolon kirjauslajin, kuten koodilla 02 vuosiloma, ja lisäämällä alkamis- ja päättymispäivämäärän. Sama käytäntö pätee myös selainversiossa, missä kirjaus tehdään valitsemalla 'Uusi loma tai poissaolo' ja syöttämällä päivämäärät.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 2
+      }
+    },
+    {
+      "question": "Miten vuosilomat ja poissaolot kirjaetaan sekä Netvisorin mobiili- että selainversiossa?",
+      "ground_truth": "Vuosilomat ja poissaolot, kuten palkaton vapaa, sairausloma ja vanhempainvapaa, kirjataan Netvisorin työaikaseurantaan joko mobiiliapissa tai selainversiossa. Vuosiloma merkitään Kirjauslaji-valikon koodilla 02, ja kirjaus tehdään valitsemalla poissaolon kirjauslaji, lisäämällä alkamis- ja päättymispäivämäärä sekä tallentamalla.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 2
+      }
+    },
+    {
+      "question": "Mistä löytyy ohjeet matkalaskun tekemiseen Netvisorissa?",
+      "ground_truth": "Ohjeet matkalaskun tekemiseen Netvisorissa löytyvät YouTube-videoista, joita ovat https://youtu.be/DPSDUv1Shb8 ja https://youtu.be/Slvpf-iJ83s.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "contact_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mikä on Netvisorin verkkosivun URL-osoite, johon kirjaudutaan matkalaskujen tekemiseksi?",
+      "ground_truth": "Netvisorin verkkosivun URL-osoite on https://suomi.netvisor.fi.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "contact_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Kuka hyväksyy matkasuunnitelman ulkomaan matkoille yhtiössä?",
+      "ground_truth": "Ulkomaan matkojen matkasuunnitelman hyväksyy toimitusjohtaja tai hänen erikseen valtuuttamansa esimies.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "contact_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Keneen tai mihin organisaatioon tai palveluun tulisi ottaa yhteyttä matkakuluihin liittyvissä kysymyksissä ja mistä löytyy tarvittavat yhteystiedot?",
+      "ground_truth": "Matkalaskujen ja matkakorvausten asioissa yhteystiedot löytyvät taloushallinnon järjestelmästä, ja matkasuunnitelman hyväksymisestä vastaa esimies. Yhtiön luottokortti- ja matka- ja edustuskulujen määräykset liittyvät talousjohtajaan, jonka yhteystietoja ei ole annettu, mutta joita käytetään matkakorvausten yhteydessä. Näiden yhteystietojen tarkka sijainti ei käy ilmi dokumentista, mutta järjestelmät ja vastuuhenkilöt ovat taloushallinnon ja esimiehen roolien kautta yhteydessä.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "contact_factual",
+        "num_chunks": 2
+      }
+    }
+  ],
+  "metadata": {
+    "total_questions": 18,
+    "generation_time_seconds": 32.337286949157715,
+    "generation_time_formatted": "0:00:32",
+    "tokens_used": {
+      "input": 22111,
+      "output": 2386,
+      "total": 24497
+    },
+    "cost_estimate": {
+      "input_cost": 0.0033166499999999995,
+      "output_cost": 0.0014316,
+      "total_cost": 0.00474825,
+      "model": "gpt-4.1-nano"
+    },
+    "configuration": {
+      "enable_single_chunk": true,
+      "enable_dual_chunk": true,
+      "enable_triple_chunk": true,
+      "enable_quad_chunk": true,
+      "enable_quint_chunk": true,
+      "enable_short_factual": true,
+      "enable_reasoning": true,
+      "enable_synthesis": true,
+      "enable_contact_factual": true,
+      "distribution": {
+        "short_factual": 70,
+        "reasoning": 4,
+        "synthesis": 2,
+        "contact_factual": 24
+      },
+      "chunk_distribution": {
+        "single": 60,
+        "dual": 20,
+        "triple": 5,
+        "quad": 2,
+        "quint": 1
+      }
+    }
+  }
+}
