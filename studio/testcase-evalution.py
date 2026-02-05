@@ -29,7 +29,7 @@ TEST_FILE = "studio/testcases/tc_20260203_085242.json"
 LIGHTRAG_ENDPOINT = "http://localhost:9622"
 # JWT Bearer token (pitkä eyJhbG... alkava token)
 #LIGHTRAG_JWT_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc2OTc1ODA1MCwicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.5DhRVY4mCM7w494PLiFsSn70u_M4yLYUx6oux8CPsGc"
-LIGHTRAG_JWT_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc3MDI3MTg2Mywicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.M-OCW5TCfiHd9Plos1Ll53B7iInqOBj1u-4zoDLWUQI"
+LIGHTRAG_JWT_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6NDkyMzgxMzIzMCwicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.0BTuVkGRO2wljpwiZoKmob22_Z7FiIj0VdqgPsKMHh4"
 # X-API-Key (lyhyempi avain)
 LIGHTRAG_API_KEY = "your-secure-api-key-here-marko"
 
@@ -44,7 +44,7 @@ CUSTOM_EMBEDDING_HOST = None  # Esim: "http://localhost:8001/v1"
 
 # Hakuasetukset
 TOP_K = 10
-QUERY_MODES = ["mix"]  # Oletus: vain mix mode. Vaihtoehdot: naive, local, global, hybrid, mix
+QUERY_MODES = ["naive"]  # Oletus: vain mix mode. Vaihtoehdot: naive, local, global, hybrid, mix
 USER_PROMPT = ""  # Custom user prompt LightRAG:lle (tyhjä = käytä oletusta)
 
 # ============================================================================

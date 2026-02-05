@@ -1,0 +1,11 @@
+
+
+
+Tarkista, mikä Python VS Code käyttää
+
+Avaa komento-paletti: Ctrl+Shift+P.
+Kirjoita Python: Select Interpreter.
+Varmista, että valittuna on .venv hakemistossasi:
+C:/Users/861100702/Documents/nanox/nano/.venv/Scripts/python.exe
+Jos siellä on väärä ympäristö (esim. järjestelmän Python), valitse oikea.
+Valitse GLOBAL!

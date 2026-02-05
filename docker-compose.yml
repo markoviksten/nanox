@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   # ==================================================
   # LightRAG Nano instanssit (7 kpl)
@@ -246,6 +244,14 @@ services:
     build: ./apps/enduser-app
     container_name: enduser-app
     ports: ["3000:80"]
+    depends_on: [agent-1]
+    restart: unless-stopped
+    networks: [stack-net]
+
+  dolmusai-app:
+    build: ./apps/dolmusai-app
+    container_name: dolmusai-app
+    ports: ["3333:80"]
     depends_on: [agent-1]
     restart: unless-stopped
     networks: [stack-net]
