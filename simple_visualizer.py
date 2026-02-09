@@ -15,6 +15,7 @@ import numpy as np
 import colorsys
 from collections import Counter
 import pandas as pd
+import html
 
 try:
     import community
@@ -43,6 +44,26 @@ st.markdown("""
         border-radius: 10px;
         border-left: 5px solid #667eea;
     }
+    .node-detail-card {
+        background: white;
+        border-radius: 8px;
+        padding: 12px;
+        margin: 8px 0;
+        border-left: 4px solid #667eea;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .node-detail-label {
+        font-weight: 600;
+        color: #667eea;
+        font-size: 0.85em;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+    }
+    .node-detail-value {
+        color: #333;
+        font-size: 0.95em;
+        word-wrap: break-word;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -63,6 +84,25 @@ DATA_DIRS = {
     "Nano-7": "/data/nano7",
 }
 
+# GraphML data key mapping (customize based on your data)
+DATA_KEY_LABELS = {
+    'd0': 'Name',
+    'd1': 'Type',
+    'd2': 'Description',
+    'd3': 'Chunk ID',
+    'd4': 'Source Document',
+    'd5': 'Timestamp',
+    'd6': 'Additional Info',
+    'entity_type': 'Entity Type',
+    'description': 'Description',
+    'source_id': 'Source',
+    'weight': 'Weight'
+}
+
+def get_readable_label(key):
+    """Convert data key to readable label"""
+    return DATA_KEY_LABELS.get(key, key.replace('_', ' ').title())
+
 def generate_colors(n: int) -> list:
     """Generate n distinct colors using HSV color space"""
     colors = []
@@ -78,6 +118,167 @@ def generate_colors(n: int) -> list:
         ))
     return colors
 
+def format_node_tooltip(node_id, node_data, degree):
+    """Create rich HTML tooltip for node"""
+    # Escape HTML characters
+    safe_node_id = html.escape(str(node_id))
+    
+    tooltip = f"""
+    <div style='
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        max-width: 400px;
+        padding: 16px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 12px;
+        color: white;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    '>
+        <div style='
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        '>
+            📍 {safe_node_id}
+        </div>
+        
+        <div style='
+            background: rgba(255,255,255,0.15);
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            backdrop-filter: blur(10px);
+        '>
+            <div style='font-size: 11px; opacity: 0.9; margin-bottom: 4px;'>CONNECTIONS</div>
+            <div style='font-size: 20px; font-weight: 600;'>{degree} edges</div>
+        </div>
+    """
+    
+    # Add all node attributes
+    for key, value in node_data.items():
+        if key and value and key != 'id':
+            label = get_readable_label(key)
+            safe_value = html.escape(str(value))
+            
+            # Truncate long descriptions for tooltip
+            display_value = safe_value
+            if len(safe_value) > 200:
+                display_value = safe_value[:200] + '...'
+            
+            # Special formatting for different types
+            if key in ['d2', 'description']:  # Description fields
+                tooltip += f"""
+                <div style='
+                    margin-top: 12px;
+                    padding: 10px;
+                    background: rgba(255,255,255,0.1);
+                    border-radius: 6px;
+                    border-left: 3px solid rgba(255,255,255,0.5);
+                '>
+                    <div style='font-size: 11px; opacity: 0.9; margin-bottom: 4px;'>{label.upper()}</div>
+                    <div style='font-size: 13px; line-height: 1.5;'>{display_value}</div>
+                </div>
+                """
+            else:
+                tooltip += f"""
+                <div style='margin-top: 8px;'>
+                    <span style='font-size: 11px; opacity: 0.8;'>{label}:</span>
+                    <span style='font-size: 13px; font-weight: 500; margin-left: 6px;'>{display_value}</span>
+                </div>
+                """
+    
+    tooltip += "</div>"
+    return tooltip
+
+def display_node_details_sidebar(node_id, node_data, graph):
+    """Display detailed node information in sidebar"""
+    st.sidebar.markdown("---")
+    st.sidebar.markdown("### 📋 Selected Node Details")
+    
+    # Node ID as header
+    st.sidebar.markdown(f"**🎯 {node_id}**")
+    
+    # Basic metrics
+    degree = graph.degree[node_id]
+    neighbors = list(graph.neighbors(node_id))
+    
+    col1, col2 = st.sidebar.columns(2)
+    with col1:
+        st.metric("Degree", degree)
+    with col2:
+        st.metric("Neighbors", len(neighbors))
+    
+    # All attributes in expandable sections
+    st.sidebar.markdown("#### 🔍 Attributes")
+    
+    # Primary info (always visible)
+    for key in ['d0', 'd1', 'entity_type', 'type']:
+        if key in node_data and node_data[key]:
+            label = get_readable_label(key)
+            st.sidebar.markdown(f"**{label}:** {node_data[key]}")
+    
+    # Description (collapsible if long)
+    for key in ['d2', 'description']:
+        if key in node_data and node_data[key]:
+            desc = str(node_data[key])
+            if len(desc) > 100:
+                with st.sidebar.expander("📝 Description"):
+                    st.markdown(desc)
+            else:
+                st.sidebar.markdown(f"**Description:** {desc}")
+    
+    # Other metadata
+    with st.sidebar.expander("📊 Metadata", expanded=True):
+        for key, value in node_data.items():
+            if key and value and key not in ['id', 'd0', 'd1', 'd2', 'entity_type', 'type', 'description']:
+                label = get_readable_label(key)
+                value_str = str(value)
+                if len(value_str) > 50:
+                    st.text(f"{label}:")
+                    st.caption(value_str)
+                else:
+                    st.text(f"{label}: {value_str}")
+    
+    # Neighbors list
+    if neighbors:
+        with st.sidebar.expander(f"🔗 {len(neighbors)} Neighbors", expanded=False):
+            for i, neighbor in enumerate(neighbors[:20], 1):
+                # Get edge data if available
+                edge_data = graph.get_edge_data(node_id, neighbor)
+                if edge_data:
+                    weight = edge_data.get('weight', '')
+                    if weight:
+                        st.text(f"{i}. {neighbor} (weight: {weight})")
+                    else:
+                        st.text(f"{i}. {neighbor}")
+                else:
+                    st.text(f"{i}. {neighbor}")
+            
+            if len(neighbors) > 20:
+                st.caption(f"... and {len(neighbors) - 20} more")
+    
+    # Centrality metrics
+    try:
+        with st.sidebar.expander("📈 Centrality Metrics"):
+            betweenness = nx.betweenness_centrality(graph)[node_id]
+            st.metric("Betweenness", f"{betweenness:.4f}")
+            
+            try:
+                closeness = nx.closeness_centrality(graph)[node_id]
+                st.metric("Closeness", f"{closeness:.4f}")
+            except:
+                pass
+            
+            try:
+                pagerank = nx.pagerank(graph)[node_id]
+                st.metric("PageRank", f"{pagerank:.4f}")
+            except:
+                pass
+    except:
+        pass
+
 # Initialize session state
 if 'filter_min_degree' not in st.session_state:
     st.session_state.filter_min_degree = 0
@@ -91,6 +292,8 @@ if 'ego_node' not in st.session_state:
     st.session_state.ego_node = None
 if 'ego_radius' not in st.session_state:
     st.session_state.ego_radius = 1
+if 'selected_node_for_details' not in st.session_state:
+    st.session_state.selected_node_for_details = None
 
 # Sidebar
 st.sidebar.title("⚙️ Settings")
@@ -134,7 +337,7 @@ st.sidebar.subheader("🔧 Graph Filtering")
 
 filter_mode = st.sidebar.radio(
     "Filter Mode",
-    ["Full Graph", "Degree Filter", "Ego Network", "Community Filter", "K-Core"]
+    ["Full Graph", "Degree Filter", "Ego Network", "Community Filter", "K-Core", "By Type"]
 )
 
 G = G_original.copy()
@@ -170,6 +373,31 @@ elif filter_mode == "K-Core":
     except:
         st.sidebar.error("Cannot compute K-Core for this graph")
         G = G_original.copy()
+
+elif filter_mode == "By Type":
+    # Get all unique types from nodes
+    all_types = set()
+    for node in G_original.nodes():
+        node_data = G_original.nodes[node]
+        node_type = node_data.get('d1') or node_data.get('type') or node_data.get('entity_type', 'unknown')
+        all_types.add(str(node_type))
+    
+    selected_types = st.sidebar.multiselect(
+        "Select Node Types",
+        sorted(all_types),
+        default=sorted(all_types)
+    )
+    
+    if selected_types:
+        nodes_to_keep = []
+        for node in G_original.nodes():
+            node_data = G_original.nodes[node]
+            node_type = node_data.get('d1') or node_data.get('type') or node_data.get('entity_type', 'unknown')
+            if str(node_type) in selected_types:
+                nodes_to_keep.append(node)
+        
+        G = G_original.subgraph(nodes_to_keep).copy()
+        st.sidebar.success(f"Filtered to {G.number_of_nodes()} nodes")
 
 # Community detection
 @st.cache_data
@@ -288,18 +516,11 @@ with st.sidebar.expander("⚙️ Advanced Settings"):
     
     color_by = st.selectbox(
         "Color Nodes By",
-        ["Community", "Degree", "Centrality", "Type", "Uniform"]
+        ["Community", "Type", "Degree", "Centrality", "Uniform"]
     )
     
     show_edge_labels = st.checkbox("Show Edge Labels", value=False)
     curved_edges = st.checkbox("Curved Edges", value=True)
-    
-    if physics:
-        st.markdown("**Physics Parameters**")
-        gravity = st.slider("Gravity", -15000, -1000, -8000, 1000)
-        spring_length = st.slider("Spring Length", 50, 500, 200, 50)
-        spring_strength = st.slider("Spring Strength", 0.01, 0.2, 0.05, 0.01)
-        damping = st.slider("Damping", 0.01, 0.5, 0.09, 0.01)
 
 # Background color picker
 with st.sidebar.expander("🎨 Color Theme"):
@@ -335,32 +556,9 @@ if search_query:
         selected_node = st.sidebar.selectbox("Select node", matching_nodes[:20])
         
         if selected_node:
-            with st.sidebar.expander("📋 Node Details", expanded=True):
-                st.markdown(f"**Node:** `{selected_node}`")
-                
-                node_data = G.nodes[selected_node]
-                for key, value in node_data.items():
-                    if value:
-                        st.text(f"{key}: {value}")
-                
-                degree = G.degree[selected_node]
-                st.metric("Degree", degree)
-                
-                try:
-                    betweenness = nx.betweenness_centrality(G)[selected_node]
-                    st.metric("Betweenness", f"{betweenness:.4f}")
-                except:
-                    pass
-                
-                neighbors = list(G.neighbors(selected_node))
-                st.metric("Neighbors", len(neighbors))
-                
-                if neighbors:
-                    with st.expander(f"Show {len(neighbors)} neighbors"):
-                        for neighbor in neighbors[:10]:
-                            st.text(f"• {neighbor}")
-                        if len(neighbors) > 10:
-                            st.text(f"... and {len(neighbors) - 10} more")
+            # Show detailed info
+            node_data = G.nodes[selected_node]
+            display_node_details_sidebar(selected_node, node_data, G)
             
             highlight_neighbors = st.sidebar.checkbox(
                 "Highlight Neighbors", 
@@ -449,6 +647,15 @@ def calculate_node_properties(_graph, communities_dict, color_by, size_by, pos_d
         num_comm = len(set(communities_dict.values()))
         comm_colors = generate_colors(num_comm)
     
+    # Generate type colors
+    if color_by == "Type":
+        all_types = set()
+        for node in _graph.nodes():
+            node_data = _graph.nodes[node]
+            node_type = node_data.get('d1') or node_data.get('type') or node_data.get('entity_type', 'unknown')
+            all_types.add(str(node_type))
+        type_colors = {t: generate_colors(len(all_types))[i] for i, t in enumerate(sorted(all_types))}
+    
     # Calculate centrality for coloring if needed
     if color_by == "Centrality":
         centrality = nx.betweenness_centrality(_graph)
@@ -468,6 +675,10 @@ def calculate_node_properties(_graph, communities_dict, color_by, size_by, pos_d
         if color_by == "Community" and communities_dict and node in communities_dict:
             comm_id = communities_dict[node]
             node_colors[node] = comm_colors[comm_id]
+        elif color_by == "Type":
+            node_data = _graph.nodes[node]
+            node_type = node_data.get('d1') or node_data.get('type') or node_data.get('entity_type', 'unknown')
+            node_colors[node] = type_colors.get(str(node_type), '#6baed6')
         elif color_by == "Degree":
             normalized = (degrees[node] - min_degree) / (max_degree - min_degree) if max_degree != min_degree else 0.5
             r = int(normalized * 255)
@@ -478,10 +689,6 @@ def calculate_node_properties(_graph, communities_dict, color_by, size_by, pos_d
             r = 255
             g = int((1 - normalized) * 255)
             node_colors[node] = f'#{r:02x}{g:02x}00'
-        elif color_by == "Type":
-            node_type = _graph.nodes[node].get('type', 'default')
-            color_idx = hash(node_type) % 10
-            node_colors[node] = generate_colors(10)[color_idx]
         else:
             node_colors[node] = '#6baed6'
     
@@ -501,7 +708,7 @@ if st.session_state.highlight_neighbors and st.session_state.ego_node:
         for neighbor in neighbors:
             node_colors[neighbor] = '#ffcc00'
 
-# Create PyVis network - KORJATTU VERSIO
+# Create PyVis network with rich tooltips
 @st.cache_data
 def create_network(_graph, _pos, _node_colors, _node_sizes, _height, _physics, _show_labels, 
                    _node_size_mult, _edge_width, _edge_opacity, _bg_color, _font_color, 
@@ -514,29 +721,20 @@ def create_network(_graph, _pos, _node_colors, _node_sizes, _height, _physics, _
         cdn_resources='in_line'
     )
     
-    # Set physics - KORJATTU: Käytä oikeita parametreja
+    # Set physics
     if _physics:
         net.barnes_hut()
     else:
         net.toggle_physics(False)
     
-    # Add nodes
+    # Add nodes with rich tooltips
     for node in _graph.nodes():
         node_data = _graph.nodes[node]
         label = str(node)[:30] if _show_labels else ""
+        degree = _graph.degree[node]
         
-        title_parts = [f"<div style='padding: 10px;'>"]
-        title_parts.append(f"<h3 style='margin: 0; color: #667eea;'>{node}</h3>")
-        title_parts.append(f"<hr style='margin: 5px 0;'>")
-        title_parts.append(f"<b>Degree:</b> {_graph.degree[node]}<br>")
-        
-        for k, v in node_data.items():
-            if k != 'id' and v:
-                v_str = str(v)[:100]
-                title_parts.append(f"<b>{k}:</b> {v_str}<br>")
-        
-        title_parts.append("</div>")
-        title = "".join(title_parts)
+        # Create rich HTML tooltip
+        tooltip = format_node_tooltip(node, node_data, degree)
         
         x, y = _pos[node]
         color = _node_colors.get(node, '#6baed6')
@@ -545,24 +743,27 @@ def create_network(_graph, _pos, _node_colors, _node_sizes, _height, _physics, _
         net.add_node(
             node, 
             label=label, 
-            title=title, 
+            title=tooltip, 
             size=size,
             color=color,
             x=x * 600,
             y=y * 600
         )
     
-    # Add edges
+    # Add edges with tooltips
     for source, target, data in _graph.edges(data=True):
         weight = data.get('weight', 1)
         
+        # Create edge tooltip
         if _show_edge_labels and data:
-            edge_title_parts = ["<div style='padding: 5px;'>"]
+            edge_parts = [f"<div style='padding: 8px; font-family: sans-serif;'>"]
+            edge_parts.append(f"<b>{source}</b> → <b>{target}</b><br><br>")
             for k, v in data.items():
-                if v:
-                    edge_title_parts.append(f"<b>{k}:</b> {v}<br>")
-            edge_title_parts.append("</div>")
-            edge_title = "".join(edge_title_parts)
+                if v and k not in ['source', 'target']:
+                    label = get_readable_label(k)
+                    edge_parts.append(f"<b>{label}:</b> {v}<br>")
+            edge_parts.append("</div>")
+            edge_title = "".join(edge_parts)
         else:
             edge_title = f"{source} → {target}"
         
@@ -589,7 +790,6 @@ if G.number_of_nodes() == 0:
     st.stop()
 
 with st.spinner("🎨 Rendering graph..."):
-    # Simplified call - ei fysiikka-parametreja
     net = create_network(
         G, pos, node_colors, node_sizes, height, physics, show_labels,
         node_size_multiplier, edge_width, edge_opacity, bg_color, font_color, 
@@ -808,14 +1008,16 @@ with st.expander("ℹ️ About & Help"):
     - 🎯 Ego network (show node + neighbors)
     - 🔧 K-core decomposition
     - 🌐 Community-based filtering
+    - 🏷️ Filter by node type
     
     **Visualization:**
     - 6+ layout algorithms
     - Dynamic node sizing (degree, centrality, PageRank)
-    - Multiple coloring schemes
+    - Multiple coloring schemes (Community, Type, Degree, Centrality)
     - Theme presets
     - Curved/straight edges
     - Adjustable physics
+    - **Rich tooltips with all node attributes**
     
     **Analysis:**
     - Community detection (Louvain)
@@ -833,25 +1035,18 @@ with st.expander("ℹ️ About & Help"):
     
     **Interactivity:**
     - Node search & selection
+    - **Detailed node information panel**
     - Neighbor highlighting
-    - Rich tooltips
+    - Rich tooltips with all metadata
     - Zoom & pan
     - Drag nodes
     
     **🎨 Usage Tips:**
-    1. Start with filters to focus on interesting subgraphs
-    2. Use ego networks to explore local neighborhoods
-    3. Try different layouts for different insights
-    4. Color by community to see structure
-    5. Size by centrality to find important nodes
-    6. Enable physics for interactive exploration
-    7. Use curved edges for better visibility
-    
-    **⌨️ Keyboard Shortcuts:**
-    - Arrow keys: Pan view
-    - +/-: Zoom in/out
-    - Drag: Pan view
-    - Scroll: Zoom
+    1. Hover over nodes to see all attributes in a rich tooltip
+    2. Use search to find and inspect specific nodes
+    3. Filter by type to focus on specific entity types
+    4. Color by type or community to see patterns
+    5. Try different layouts for different insights
     
     **Made with ❤️ using:**
     - Streamlit (UI)
@@ -863,4 +1058,4 @@ with st.expander("ℹ️ About & Help"):
 
 st.sidebar.markdown("---")
 st.sidebar.markdown("🚀 **GraphRAG Studio v2.0**")
-st.sidebar.caption("Ultimate Edition")
+st.sidebar.caption("Ultimate Edition - Enhanced")
