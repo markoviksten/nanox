@@ -501,31 +501,22 @@ if st.session_state.highlight_neighbors and st.session_state.ego_node:
         for neighbor in neighbors:
             node_colors[neighbor] = '#ffcc00'
 
-# Create PyVis network
+# Create PyVis network - KORJATTU VERSIO
 @st.cache_data
 def create_network(_graph, _pos, _node_colors, _node_sizes, _height, _physics, _show_labels, 
-                   _node_size_mult, _edge_width, _edge_opacity, _gravity, _spring_length, 
-                   _spring_strength, _damping, _bg_color, _font_color, _show_edge_labels,
-                   _curved_edges):
+                   _node_size_mult, _edge_width, _edge_opacity, _bg_color, _font_color, 
+                   _show_edge_labels, _curved_edges):
     net = Network(
         height=f"{_height}px", 
         width="100%", 
         bgcolor=_bg_color, 
         font_color=_font_color,
-        select_menu=True,
-        filter_menu=True,
         cdn_resources='in_line'
     )
     
-    # Set physics using PyVis methods instead of set_options
+    # Set physics - KORJATTU: Käytä oikeita parametreja
     if _physics:
-        net.barnes_hut(
-            gravity=_gravity,
-            central_gravity=0.3,
-            spring_length=_spring_length,
-            spring_constant=_spring_strength,
-            damping=_damping
-        )
+        net.barnes_hut()
     else:
         net.toggle_physics(False)
     
@@ -598,18 +589,12 @@ if G.number_of_nodes() == 0:
     st.stop()
 
 with st.spinner("🎨 Rendering graph..."):
-    if physics:
-        net = create_network(
-            G, pos, node_colors, node_sizes, height, physics, show_labels,
-            node_size_multiplier, edge_width, edge_opacity, gravity, spring_length, 
-            spring_strength, damping, bg_color, font_color, show_edge_labels, curved_edges
-        )
-    else:
-        net = create_network(
-            G, pos, node_colors, node_sizes, height, physics, show_labels,
-            node_size_multiplier, edge_width, edge_opacity, -8000, 200, 
-            0.05, 0.09, bg_color, font_color, show_edge_labels, curved_edges
-        )
+    # Simplified call - ei fysiikka-parametreja
+    net = create_network(
+        G, pos, node_colors, node_sizes, height, physics, show_labels,
+        node_size_multiplier, edge_width, edge_opacity, bg_color, font_color, 
+        show_edge_labels, curved_edges
+    )
     
     with tempfile.NamedTemporaryFile(delete=False, suffix=".html", mode='w', encoding='utf-8') as f:
         net.save_graph(f.name)
