@@ -1,0 +1,206 @@
+{
+  "test_cases": [
+    {
+      "question": "Miten työntekijät voivat kirjata työtuntinsa Netvisorissa?",
+      "ground_truth": "Työntekijät voivat kirjata työtuntinsa Netvisorissa mobiili-appin kautta. Kirjaaminen tapahtuu klikkaamalla vasemman yläkulman kolmea viivaa, valitsemalla 'Työaika' ja kuittaamalla työaika klikkaamalla harmaa päivä vihreäksi.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Kuinka kauan työaikakirjanpitoa tulee säilyttää työnantajan toimesta?",
+      "ground_truth": "Työaikakirjanpitoa tulee säilyttää vähintään kahden vuoden ajan työnantajan toimesta.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mitä tarkoittaa 'Lisää muu kulu' matkalaskussa?",
+      "ground_truth": "'Lisää muu kulu' tarkoittaa omaan laskutukseen liittyviä kuluja, kuten omalla korvalla maksettuja kuluja, joita ei ole muussa osiossa mainittu.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Miten matkalasku tallennetaan Netvisorissa?",
+      "ground_truth": "Matkalasku tallennetaan Netvisorissa, kun kaikki rivit on täytetty ja lopuksi klikataan 'tallenna'.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Miten DOCin työntekijät kirjaavat lomansa ja poissaolonsa?",
+      "ground_truth": "DOCin työntekijät kirjaavat itse vuosilomat ja muut poissaolonsa Netvisorin työaikaseurantaan.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Miten vuosiloma merkitään Netvisorin mobiiliappissa?",
+      "ground_truth": "Vuosiloma merkitään Kirjauslaji-valikon koodilla 02. Vuosiloma.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mitä matkasuunnitelmassa tulee määrittää?",
+      "ground_truth": "Matkasuunnitelmassa tulee määrittää matkan tarkoitus, aikataulu (lähtö, paluu) ja reitti, matkakohde ja tavattavat henkilöt, matkustustapa, hotellien käyttö ja taso, mahdollinen auton vuokraus kohdepaikkakunnalla sekä arvio matkan kokonaiskustannuksista.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Kuka hyväksyy ulkomaan matkojen matkasuunnitelmat?",
+      "ground_truth": "Ulkomaan matkojen matkasuunnitelmat hyväksyy toimitusjohtaja tai hänen erikseen valtuuttamansa esimies.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mikä on kilometrikorvauksen maksamisen edellytys, jos matka tehdään omalla autolla?",
+      "ground_truth": "Kilometrikorvausta maksetaan, jos matka on sovittu tehtäväksi omalla autolla ja sen määräytyminen perustuu työehtosopimusten ja verohallituksen ohjeiden mukaisesti.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mikä on päivärahan edellytys matkalla?",
+      "ground_truth": "Päivärahan edellytys on, että matkan pituus on vähintään 15 km työpaikasta tai asunnosta.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mitä tapahtuu, jos työnantaja järjestää toimihenkilölle ilmaisen ruoan?",
+      "ground_truth": "Jos työnantaja järjestää toimihenkilölle ilmaisen ruoan, vähennetään päivärahakorvauksesta puolet. Ilmaisella ruoalla tarkoitetaan kokopäivärahan kyseessä ollen kahta ja osapäivärahan kyseessä ollen yhtä ilmaista ateriaa.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Miten työaikaseuranta ja matkalaskujen teko hoidetaan Netvisorissa?",
+      "ground_truth": "Työaikaseuranta Netvisorissa tapahtuu kirjaamalla työtunnit mobiili-appin tai tietokoneen kautta. Matkalaskut taas tehdään Netvisoriin joko tietokoneella tai mobiili-appilla, ja jokaisella on oma palkansaajatunnus matkalaskujen tekemistä varten.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 2
+      }
+    },
+    {
+      "question": "Mitä tietoja täytyy lisätä matkalaskuun Netvisorissa?",
+      "ground_truth": "Matkalaskussa on pakollisia tietoja kuten 'Matkan otsikko' ja 'Selite', joihin on lisättävä osallistuneiden nimet ja firman nimi. Lisäksi on mainittava mahdolliset kulut kuten kilometrikorvaukset ja päivärahat.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 2
+      }
+    },
+    {
+      "question": "Miten lomat ja poissaolot kirjataan Netvisorissa?",
+      "ground_truth": "Lomat ja poissaolot kirjataan Netvisorin mobiiliappilla tai selainversiossa valitsemalla TYÖAIKA → LISÄÄ LOMA TAI POISSAOLO ja syöttämällä poissaolon KIRJAUSLAJI sekä ALKUPÄIVÄ ja LOPPUPÄIVÄ. Vuosiloma merkitään koodilla 02.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 2
+      }
+    },
+    {
+      "question": "Mikä on matkalaskun lähettämiseen liittyvien asiakirjojen sisältö?",
+      "ground_truth": "Matkalaskun yhteydessä tulee toimittaa matkaraportti esimiehelle, jossa kuvataan keskeiset matkan tarkoitukseen liittyvät asiat.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "contact_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Miten bonuspisteet liittyvät työntekijän verotukseen?",
+      "ground_truth": "Bonuspisteet, jotka työntekijä saa työnantajan maksamien suoritusten perusteella, käytetään pääsääntöisesti työnantajan hyväksi, eikä niistä synny veronalaista etua työntekijälle. Poikkeustapauksissa, jos työntekijä saa edut yksityiskäyttöönsä, ne ovat veronalaista ansiotuloa, ja työntekijän on ilmoitettava nämä veroilmoituksessaan.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "contact_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Kuka hyväksyy ulkomaan matkojen matkasuunnitelmat?",
+      "ground_truth": "Ulkomaan matkojen matkasuunnitelmat hyväksyy toimitusjohtaja tai hänen erikseen valtuuttamansa esimies.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "contact_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Keneen otan yhteyttä, kun tarvitsen hyväksynnän ulkomaan matkasuunnitelmalle?",
+      "ground_truth": "Ulkomaan matkasuunnitelman hyväksynnän antaa toimitusjohtaja tai hänen erikseen valtuuttamansa esimies.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "contact_factual",
+        "num_chunks": 2
+      }
+    }
+  ],
+  "metadata": {
+    "total_questions": 18,
+    "generation_time_seconds": 64.72550129890442,
+    "generation_time_formatted": "0:01:04",
+    "tokens_used": {
+      "input": 19343,
+      "output": 2281,
+      "total": 21624
+    },
+    "cost_estimate": {
+      "input_cost": 0.00290145,
+      "output_cost": 0.0013686,
+      "total_cost": 0.00427005,
+      "model": "gpt-4o-mini"
+    },
+    "configuration": {
+      "enable_single_chunk": true,
+      "enable_dual_chunk": true,
+      "enable_triple_chunk": true,
+      "enable_quad_chunk": true,
+      "enable_quint_chunk": true,
+      "enable_short_factual": true,
+      "enable_reasoning": true,
+      "enable_synthesis": true,
+      "enable_contact_factual": true,
+      "distribution": {
+        "short_factual": 70,
+        "reasoning": 4,
+        "synthesis": 2,
+        "contact_factual": 24
+      },
+      "chunk_distribution": {
+        "single": 60,
+        "dual": 20,
+        "triple": 5,
+        "quad": 2,
+        "quint": 1
+      }
+    }
+  }
+}

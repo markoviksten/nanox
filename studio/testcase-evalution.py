@@ -23,7 +23,7 @@ if not OPENAI_API_KEY:
     raise ValueError("LLM_BINDING_API_KEY ei löydy .env-tiedostosta!")
 
 # Testitiedosto (polku projektin juuresta)
-TEST_FILE = "studio/testcases/tc_20260203_085242.json"
+TEST_FILE = "studio/testcases/tc_20260210_105014.json"
 
 # LightRAG API asetukset
 LIGHTRAG_ENDPOINT = "http://localhost:9622"
@@ -44,7 +44,7 @@ CUSTOM_EMBEDDING_HOST = None  # Esim: "http://localhost:8001/v1"
 
 # Hakuasetukset
 TOP_K = 10
-QUERY_MODES = ["naive"]  # Oletus: vain mix mode. Vaihtoehdot: naive, local, global, hybrid, mix
+QUERY_MODES = ["mix"]  # Oletus: vain mix mode. Vaihtoehdot: naive, local, global, hybrid, mix
 USER_PROMPT = ""  # Custom user prompt LightRAG:lle (tyhjä = käytä oletusta)
 
 # ============================================================================

@@ -1,0 +1,45 @@
+
+model_list:
+ # OpenAI mallit
+  - model_name: gpt-4o-mini
+    litellm_params:
+      model: openai/gpt-4o-mini
+      api_key: os.environ/OPENAI_API_KEY
+      
+  - model_name: text-embedding-3-small
+    litellm_params:
+      model: openai/text-embedding-3-small
+      api_key: os.environ/OPENAI_API_KEY
+  # Embedding model
+  - model_name: intfloat/multilingual-e5-large
+    litellm_params:
+      model: watsonx/intfloat/multilingual-e5-large
+      embedding_dimensions: "os.environ/EMBEDDING_DIM"
+      api_key: "os.environ/WATSONX_API_KEY"
+      project_id: "os.environ/WATSONX_PROJECT_ID"
+      url: "os.environ/WATSONX_URL"
+      input_cost_per_token: 0.0000001
+      output_cost_per_token: 0.0000001
+    model_info:
+      mode: embedding
+
+  # LLM model for text/completions
+  - model_name: meta-llama/llama-3-3-70b-instruct
+    litellm_params:
+      model: watsonx/meta-llama/llama-3-3-70b-instruct
+      api_key: "os.environ/WATSONX_API_KEY"
+      project_id: "os.environ/WATSONX_PROJECT_ID"
+      url: "os.environ/WATSONX_URL"
+
+
+general_settings:
+  master_key: sk-1234
+  disable_fallbacks: true
+  enforce_model_usage: true
+  log_level: debug
+  store_model_in_db: true
+  store_prompts_in_spend_logs: true
+
+litellm_settings:
+  drop_params: true
+

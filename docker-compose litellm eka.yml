@@ -1,40 +1,160 @@
+version: '3.8'
+
 services:
-
   # ==================================================
-  # LiteLLM Stack
+  # LightRAG Nano instanssit (7 kpl)
   # ==================================================
 
-  litellm:
-    image: docker.litellm.ai/berriai/litellm:main-stable
-    container_name: litellm
-    volumes:
-      - ./LiteLLM/config.yaml:/app/config.yaml
-    command:
-      - "--config=/app/config.yaml"
+  lightrag-nano-1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: lightrag-nano-1
     ports:
-      - "4000:4000" 
-    environment:
-      DATABASE_URL: "postgresql://llmproxy:dbpassword9090@db:5432/litellm"
-      STORE_MODEL_IN_DB: "True"
+      - "9621:9621"
+    volumes:
+      - ./data/nano1/rag_storage:/app/data/rag_storage
+      - ./data/nano1/inputs:/app/data/inputs
+      - ./config.ini:/app/config.ini
+      - ./.env:/app/.env
     env_file:
-      - .env2  # LiteLLM käyttää .env2
-    depends_on:
-      - db
-    healthcheck:
-      test:
-        - CMD-SHELL
-        - python3 -c "import urllib.request; urllib.request.urlopen('http://localhost:4000/health/liveliness')"
-      interval: 30s 
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+      - .env
+    environment:
+      - INSTANCE_ID=nano-1
     restart: unless-stopped
-    networks: [stack-net]
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - stack-net
+
+  lightrag-nano-2:
+    image: ghcr.io/hkuds/lightrag:latest
+    container_name: lightrag-nano-2
+    ports:
+      - "9622:9621"
+    volumes:
+      - ./data/nano2/rag_storage:/app/data/rag_storage
+      - ./data/nano2/inputs:/app/data/inputs
+      - ./config.ini:/app/config.ini
+      - ./.env:/app/.env
+    env_file:
+      - .env
+    environment:
+      - INSTANCE_ID=nano-2
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - stack-net
+
+  lightrag-nano-3:
+    image: ghcr.io/hkuds/lightrag:latest
+    container_name: lightrag-nano-3
+    ports:
+      - "9623:9621"
+    volumes:
+      - ./data/nano3/rag_storage:/app/data/rag_storage
+      - ./data/nano3/inputs:/app/data/inputs
+      - ./config.ini:/app/config.ini
+      - ./.env:/app/.env
+    env_file:
+      - .env
+    environment:
+      - INSTANCE_ID=nano-3
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - stack-net
+
+  lightrag-nano-4:
+    image: ghcr.io/hkuds/lightrag:latest
+    container_name: lightrag-nano-4
+    ports:
+      - "9624:9621"
+    volumes:
+      - ./data/nano4/rag_storage:/app/data/rag_storage
+      - ./data/nano4/inputs:/app/data/inputs
+      - ./config.ini:/app/config.ini
+      - ./.env:/app/.env
+    env_file:
+      - .env
+    environment:
+      - INSTANCE_ID=nano-4
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - stack-net
+
+  lightrag-nano-5:
+    image: ghcr.io/hkuds/lightrag:latest
+    container_name: lightrag-nano-5
+    ports:
+      - "9625:9621"
+    volumes:
+      - ./data/nano5/rag_storage:/app/data/rag_storage
+      - ./data/nano5/inputs:/app/data/inputs
+      - ./config.ini:/app/config.ini
+      - ./.env:/app/.env
+    env_file:
+      - .env
+    environment:
+      - INSTANCE_ID=nano-5
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - stack-net
+
+  lightrag-nano-6:
+    image: ghcr.io/hkuds/lightrag:latest
+    container_name: lightrag-nano-6
+    ports:
+      - "9626:9621"
+    volumes:
+      - ./data/nano6/rag_storage:/app/data/rag_storage
+      - ./data/nano6/inputs:/app/data/inputs
+      - ./config.ini:/app/config.ini
+      - ./.env:/app/.env
+    env_file:
+      - .env
+    environment:
+      - INSTANCE_ID=nano-6
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - stack-net
+
+  lightrag-nano-7:
+    image: ghcr.io/hkuds/lightrag:latest
+    container_name: lightrag-nano-7
+    ports:
+      - "9627:9621"
+    volumes:
+      - ./data/nano7/rag_storage:/app/data/rag_storage
+      - ./data/nano7/inputs:/app/data/inputs
+      - ./config.ini:/app/config.ini
+      - ./.env:/app/.env
+    env_file:
+      - .env
+    environment:
+      - INSTANCE_ID=nano-7
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - stack-net
+
+  # ==================================================
+  # LiteLLM + Database
+  # ==================================================
 
   db:
     image: postgres:16
-    restart: always
     container_name: litellm_db
+    restart: always
     environment:
       POSTGRES_DB: litellm
       POSTGRES_USER: llmproxy
@@ -48,11 +168,44 @@ services:
       interval: 1s
       timeout: 5s
       retries: 10
-    networks: [stack-net]
+    networks:
+      - stack-net
+
+  litellm:
+    image: docker.litellm.ai/berriai/litellm:main-stable
+    container_name: litellm
+    volumes:
+      - ./LiteLLM/config.yaml:/app/config.yaml
+    command:
+      - "--config=/app/config.yaml"
+    ports:
+      - "4000:4000"
+    environment:
+      DATABASE_URL: "postgresql://llmproxy:dbpassword9090@db:5432/litellm"
+      STORE_MODEL_IN_DB: "True"
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - python3 -c "import urllib.request; urllib.request.urlopen('http://localhost:4000/health/liveliness')"
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - stack-net
+
+  # ==================================================
+  # Monitoring
+  # ==================================================
 
   prometheus:
     image: prom/prometheus
-    container_name: litellm_prometheus
+    container_name: prometheus
     volumes:
       - prometheus_data:/prometheus
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
@@ -63,222 +216,104 @@ services:
       - "--storage.tsdb.path=/prometheus"
       - "--storage.tsdb.retention.time=15d"
     restart: always
-    networks: [stack-net]
+    networks:
+      - stack-net
 
   # ==================================================
-  # LightRAG Nano instanssit (7 kpl)
-  # ==================================================
-
-  lightrag-nano-1:
-    image: ghcr.io/hkuds/lightrag:latest
-    container_name: lightrag-nano-1
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "9621:9621"
-    volumes:
-      - ./data/nano1/rag_storage:/app/data/rag_storage
-      - ./data/nano1/inputs:/app/data/inputs
-      - ./config.ini:/app/config.ini
-      - ./.env:/app/.env
-    env_file: 
-      - .env  # OpenAI-konfiguraatio
-    environment:
-      - INSTANCE_ID=nano-1
-    restart: unless-stopped
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    networks: [stack-net]
-
-  lightrag-nano-2:
-    image: ghcr.io/hkuds/lightrag:latest
-    container_name: lightrag-nano-2
-    ports: ["9622:9621"]
-    volumes:
-      - ./data/nano2/rag_storage:/app/data/rag_storage
-      - ./data/nano2/inputs:/app/data/inputs
-      - ./config.ini:/app/config.ini
-      - ./.env:/app/.env
-    env_file: 
-      - .env  # OpenAI-konfiguraatio
-    environment:
-      - INSTANCE_ID=nano-2
-    restart: unless-stopped
-    extra_hosts: ["host.docker.internal:host-gateway"]
-    networks: [stack-net]
-
-  lightrag-nano-3:
-    image: ghcr.io/hkuds/lightrag:latest
-    container_name: lightrag-nano-3
-    ports: ["9623:9621"]
-    volumes:
-      - ./data/nano3/rag_storage:/app/data/rag_storage
-      - ./data/nano3/inputs:/app/data/inputs
-      - ./config.ini:/app/config.ini
-      - ./.env:/app/.env
-    env_file: 
-      - .env  # OpenAI-konfiguraatio
-    environment:
-      - INSTANCE_ID=nano-3
-    restart: unless-stopped
-    extra_hosts: ["host.docker.internal:host-gateway"]
-    networks: [stack-net]
-
-  lightrag-nano-4:
-    image: ghcr.io/hkuds/lightrag:latest
-    container_name: lightrag-nano-4
-    ports: ["9624:9621"]
-    volumes:
-      - ./data/nano4/rag_storage:/app/data/rag_storage
-      - ./data/nano4/inputs:/app/data/inputs
-      - ./config.ini:/app/config.ini
-      - ./.env:/app/.env
-    env_file: 
-      - .env  # OpenAI-konfiguraatio
-    environment:
-      - INSTANCE_ID=nano-4
-    restart: unless-stopped
-    extra_hosts: ["host.docker.internal:host-gateway"]
-    networks: [stack-net]
-
-  # LiteLLM-käyttöiset instanssit alkavat tästä
-
-  lightrag-nano-5:
-    image: ghcr.io/hkuds/lightrag:latest
-    container_name: lightrag-nano-5
-    ports: ["9625:9621"]
-    volumes:
-      - ./data/nano5/rag_storage:/app/data/rag_storage
-      - ./data/nano5/inputs:/app/data/inputs
-      - ./config.ini:/app/config.ini
-      - ./.env2:/app/.env
-    env_file: 
-      - .env2  # LiteLLM/WatsonX-konfiguraatio
-    environment:
-      - INSTANCE_ID=nano-5
-    restart: unless-stopped
-    extra_hosts: ["host.docker.internal:host-gateway"]
-    networks: [stack-net]
-    depends_on:
-      litellm:
-        condition: service_healthy
-
-  lightrag-nano-6:
-    image: ghcr.io/hkuds/lightrag:latest
-    container_name: lightrag-nano-6
-    ports: ["9626:9621"]
-    volumes:
-      - ./data/nano6/rag_storage:/app/data/rag_storage
-      - ./data/nano6/inputs:/app/data/inputs
-      - ./config.ini:/app/config.ini
-      - ./.env2:/app/.env
-    env_file: 
-      - .env2  # LiteLLM/WatsonX-konfiguraatio
-    environment:
-      - INSTANCE_ID=nano-6
-    restart: unless-stopped
-    extra_hosts: ["host.docker.internal:host-gateway"]
-    networks: [stack-net]
-    depends_on:
-      litellm:
-        condition: service_healthy
-
-  lightrag-nano-7:
-    image: ghcr.io/hkuds/lightrag:latest
-    container_name: lightrag-nano-7
-    ports: ["9627:9621"]
-    volumes:
-      - ./data/nano7/rag_storage:/app/data/rag_storage
-      - ./data/nano7/inputs:/app/data/inputs
-      - ./config.ini:/app/config.ini
-      - ./.env:/app/.env
-    env_file: 
-      - .env  # OpenAI-konfiguraatio
-    environment:
-      - INSTANCE_ID=nano-7
-    restart: unless-stopped
-    extra_hosts: ["host.docker.internal:host-gateway"]
-    networks: [stack-net]
-
-  # ==================================================
-  # UI:t
+  # UI Applications
   # ==================================================
 
   enduser-app:
     build: ./apps/enduser-app
     container_name: enduser-app
-    ports: ["3000:80"]
+    ports:
+      - "3000:80"
     restart: unless-stopped
-    networks: [stack-net]
-
-  dolmusai-app:
-    build: ./apps/dolmusai-app
-    container_name: dolmusai-app
-    ports: ["3333:80"]
-    restart: unless-stopped
-    networks: [stack-net]
+    networks:
+      - stack-net
 
   admin-app:
     build: ./apps/admin-app
     container_name: admin-app
-    ports: ["3099:80"]
+    ports:
+      - "3099:80"
     restart: unless-stopped
-    networks: [stack-net]
+    networks:
+      - stack-net
 
   enduser-app2:
     build: ./apps/enduser-app2
     container_name: enduser-app2
-    ports: ["3002:80"]
+    ports:
+      - "3002:80"
     restart: unless-stopped
-    networks: [stack-net]
+    networks:
+      - stack-net
 
   enduser-app3:
     build: ./apps/enduser-app3
     container_name: enduser-app3
-    ports: ["3003:80"]
+    ports:
+      - "3003:80"
     restart: unless-stopped
-    networks: [stack-net]
+    networks:
+      - stack-net
 
   enduser-app4:
     build: ./apps/enduser-app4
     container_name: enduser-app4
-    ports: ["3004:80"]
+    ports:
+      - "3004:80"
     restart: unless-stopped
-    networks: [stack-net]
+    networks:
+      - stack-net
 
   enduser-app5:
     build: ./apps/enduser-app5
     container_name: enduser-app5
-    ports: ["3005:80"]
+    ports:
+      - "3005:80"
     restart: unless-stopped
-    networks: [stack-net]
+    networks:
+      - stack-net
 
   enduser-app6:
     build: ./apps/enduser-app6
     container_name: enduser-app6
-    ports: ["3006:80"]
+    ports:
+      - "3006:80"
     restart: unless-stopped
-    networks: [stack-net]
+    networks:
+      - stack-net
 
   enduser-app7:
     build: ./apps/enduser-app7
     container_name: enduser-app7
-    ports: ["3007:80"]
+    ports:
+      - "3007:80"
     restart: unless-stopped
-    networks: [stack-net]
+    networks:
+      - stack-net
 
   nanolab-app:
     build: ./apps/nanolab-app
     container_name: nanolab-app
-    ports: ["3033:80"]
+    ports:
+      - "3033:80"
     restart: unless-stopped
-    networks: [stack-net]
+    networks:
+      - stack-net
 
+# ==================================================
+# Networks
+# ==================================================
 networks:
   stack-net:
     driver: bridge
 
+# ==================================================
+# Volumes
+# ==================================================
 volumes:
   prometheus_data:
     driver: local

@@ -1,69 +1,8 @@
 services:
 
   # ==================================================
-  # LiteLLM Stack
+  # + visualzer + dolmusai (under dev)
   # ==================================================
-
-  litellm:
-    image: docker.litellm.ai/berriai/litellm:main-stable
-    container_name: litellm
-    volumes:
-      - ./LiteLLM/config.yaml:/app/config.yaml
-    command:
-      - "--config=/app/config.yaml"
-    ports:
-      - "4000:4000" 
-    environment:
-      DATABASE_URL: "postgresql://llmproxy:dbpassword9090@db:5432/litellm"
-      STORE_MODEL_IN_DB: "True"
-    env_file:
-      - .env2  # LiteLLM käyttää .env2
-    depends_on:
-      - db
-    healthcheck:
-      test:
-        - CMD-SHELL
-        - python3 -c "import urllib.request; urllib.request.urlopen('http://localhost:4000/health/liveliness')"
-      interval: 30s 
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-    restart: unless-stopped
-    networks: [stack-net]
-
-  db:
-    image: postgres:16
-    restart: always
-    container_name: litellm_db
-    environment:
-      POSTGRES_DB: litellm
-      POSTGRES_USER: llmproxy
-      POSTGRES_PASSWORD: dbpassword9090
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -d litellm -U llmproxy"]
-      interval: 1s
-      timeout: 5s
-      retries: 10
-    networks: [stack-net]
-
-  prometheus:
-    image: prom/prometheus
-    container_name: litellm_prometheus
-    volumes:
-      - prometheus_data:/prometheus
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-    ports:
-      - "9090:9090"
-    command:
-      - "--config.file=/etc/prometheus/prometheus.yml"
-      - "--storage.tsdb.path=/prometheus"
-      - "--storage.tsdb.retention.time=15d"
-    restart: always
-    networks: [stack-net]
 
   # ==================================================
   # LightRAG Nano instanssit (7 kpl)
@@ -82,8 +21,7 @@ services:
       - ./data/nano1/inputs:/app/data/inputs
       - ./config.ini:/app/config.ini
       - ./.env:/app/.env
-    env_file: 
-      - .env  # OpenAI-konfiguraatio
+    env_file: [.env]
     environment:
       - INSTANCE_ID=nano-1
     restart: unless-stopped
@@ -100,8 +38,7 @@ services:
       - ./data/nano2/inputs:/app/data/inputs
       - ./config.ini:/app/config.ini
       - ./.env:/app/.env
-    env_file: 
-      - .env  # OpenAI-konfiguraatio
+    env_file: [.env]
     environment:
       - INSTANCE_ID=nano-2
     restart: unless-stopped
@@ -117,8 +54,7 @@ services:
       - ./data/nano3/inputs:/app/data/inputs
       - ./config.ini:/app/config.ini
       - ./.env:/app/.env
-    env_file: 
-      - .env  # OpenAI-konfiguraatio
+    env_file: [.env]
     environment:
       - INSTANCE_ID=nano-3
     restart: unless-stopped
@@ -134,15 +70,12 @@ services:
       - ./data/nano4/inputs:/app/data/inputs
       - ./config.ini:/app/config.ini
       - ./.env:/app/.env
-    env_file: 
-      - .env  # OpenAI-konfiguraatio
+    env_file: [.env]
     environment:
       - INSTANCE_ID=nano-4
     restart: unless-stopped
     extra_hosts: ["host.docker.internal:host-gateway"]
     networks: [stack-net]
-
-  # LiteLLM-käyttöiset instanssit alkavat tästä
 
   lightrag-nano-5:
     image: ghcr.io/hkuds/lightrag:latest
@@ -152,17 +85,13 @@ services:
       - ./data/nano5/rag_storage:/app/data/rag_storage
       - ./data/nano5/inputs:/app/data/inputs
       - ./config.ini:/app/config.ini
-      - ./.env2:/app/.env
-    env_file: 
-      - .env2  # LiteLLM/WatsonX-konfiguraatio
+      - ./.env:/app/.env
+    env_file: [.env]
     environment:
       - INSTANCE_ID=nano-5
     restart: unless-stopped
     extra_hosts: ["host.docker.internal:host-gateway"]
     networks: [stack-net]
-    depends_on:
-      litellm:
-        condition: service_healthy
 
   lightrag-nano-6:
     image: ghcr.io/hkuds/lightrag:latest
@@ -172,17 +101,13 @@ services:
       - ./data/nano6/rag_storage:/app/data/rag_storage
       - ./data/nano6/inputs:/app/data/inputs
       - ./config.ini:/app/config.ini
-      - ./.env2:/app/.env
-    env_file: 
-      - .env2  # LiteLLM/WatsonX-konfiguraatio
+      - ./.env:/app/.env
+    env_file: [.env]
     environment:
       - INSTANCE_ID=nano-6
     restart: unless-stopped
     extra_hosts: ["host.docker.internal:host-gateway"]
     networks: [stack-net]
-    depends_on:
-      litellm:
-        condition: service_healthy
 
   lightrag-nano-7:
     image: ghcr.io/hkuds/lightrag:latest
@@ -193,8 +118,7 @@ services:
       - ./data/nano7/inputs:/app/data/inputs
       - ./config.ini:/app/config.ini
       - ./.env:/app/.env
-    env_file: 
-      - .env  # OpenAI-konfiguraatio
+    env_file: [.env]
     environment:
       - INSTANCE_ID=nano-7
     restart: unless-stopped
@@ -275,12 +199,37 @@ services:
     restart: unless-stopped
     networks: [stack-net]
 
+  # ==================================================
+  # LightRAG 3D Visualizer
+  # ==================================================
+
+  lightrag-visualizer:
+    build:
+      context: .
+      dockerfile: Dockerfile.visualizer
+    container_name: lightrag-visualizer
+    ports:
+      - "8501:8501"
+    volumes:
+      # Mountataan kaikkien nano-instanssien rag_storage read-only
+      - ./data/nano1/rag_storage:/data/nano1:ro
+      - ./data/nano2/rag_storage:/data/nano2:ro
+      - ./data/nano3/rag_storage:/data/nano3:ro
+      - ./data/nano4/rag_storage:/data/nano4:ro
+      - ./data/nano5/rag_storage:/data/nano5:ro
+      - ./data/nano6/rag_storage:/data/nano6:ro
+      - ./data/nano7/rag_storage:/data/nano7:ro
+    restart: unless-stopped
+    networks: [stack-net]
+    depends_on:
+      - lightrag-nano-1
+      - lightrag-nano-2
+      - lightrag-nano-3
+      - lightrag-nano-4
+      - lightrag-nano-5
+      - lightrag-nano-6
+      - lightrag-nano-7
+
 networks:
   stack-net:
     driver: bridge
-
-volumes:
-  prometheus_data:
-    driver: local
-  postgres_data:
-    name: litellm_postgres_data
