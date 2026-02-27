@@ -1,0 +1,332 @@
+{
+  "test_cases": [
+    {
+      "question": "Mikä on tilinpäätös?",
+      "ground_truth": "Tilinpäätös on tilikauden päättyessä laadittavan laskelman ja tarvittavien tilinpäätösasiakirjojen muodostama kokonaisuus.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mihin yritys tarvitsee tilinpäätöstä?",
+      "ground_truth": "Yritys tarvitsee tilinpäätöstä veroilmoitusta tehdessä, veroilmoituksen liitteeksi, yritystoiminnan sopimuksia varten ja esimerkiksi hakiessaan rahoitusta.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mitä sisältää yrityksen tilinpäätös?",
+      "ground_truth": "Yrityksen tilinpäätös sisältää tuloslaskelman ja yrityksen taseen sekä tarvittavat tilinpäätöksen liitetiedot, kuten rahoituslaskelman, toimintakertomuksen, kirjanpito- ja aineistoluettelon, tilintarkastajan päätösmerkinnän ja vertailuluvut edelliseltä tilikaudelta.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Milloin osakeyhtiön on toimitettava tilinpäätös Kaupparekisteriin?",
+      "ground_truth": "Osakeyhtiön on toimitettava tilinpäätös Kaupparekisteriin kahden kuukauden kuluessa tilinpäätöksen vahvistamisesta.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mikä on tuloslaskelma?",
+      "ground_truth": "Tuloslaskelma kertoo, miten yrityksen tulos on muodostunut tilikauden aikana, ja esittää yrityksen tulot ja kulut tilikauden aikana.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mitä tarkoittaa liikevaihto?",
+      "ground_truth": "Liikevaihto tarkoittaa yrityksen palveluiden ja tuotteiden myynnistä saatua tuottoa ilman veroja ja vähennyksiä.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mitä ovat rahoituskulut?",
+      "ground_truth": "Rahoituskuluja ovat korkokulut, arvoalentumiset sekä pysyvien ja vaihtuvien vastaavien sijoituksista aiheutuvat kulut ja muut rahoituskulut.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mikä on tuloveron määrä osakeyhtiössä tai osuuskunnassa?",
+      "ground_truth": "Osakeyhtiön tai osuuskunnan tulovero on 20 prosenttia tuloksesta.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mitä tarkoittaa poistot tilikauden tuloksen laskennassa?",
+      "ground_truth": "Poistot ovat kirjanpidollinen erä, joka pienentää tilikauden tulosta ja tuloksesta maksettavan veron määrää, vaikka ne eivät ole varsinaisia kuluja.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mitä kulut sisältyvät liiketoiminnan muihin kuluihin?",
+      "ground_truth": "Liiketoiminnan muihin kuluihin kuuluvat esimerkiksi toimitila-, ajoneuvo-, laite- ja ohjelmistokulut, matka-, markkinointi-, edustus- sekä tutkimus- ja kehityskulut.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mitä tase kertoo yrityksen taloudellisesta tilasta?",
+      "ground_truth": "Tase kertoo yrityksen taloudellisen tilan tilinpäätöspäivänä ja listaa yrityksen varat ja velat.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mikä on taseen vastaavaa-puoli?",
+      "ground_truth": "Taseen vastaavaa-puoli kertoo yrityksen varat eli sen mitä yritys omistaa ja mitä varoja yritys voi käyttää velkojensa maksuun.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mitä tarkoittaa taseen vastattavaa-puoli?",
+      "ground_truth": "Taseen vastattavaa-puoli koostuu yrityksen omasta ja vieraasta pääomasta, johon lukeutuvat muun muassa osakepääoma, muut rahastot ja lainat rahoituslaitoksilta.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Miten taseen loppusumma lasketaan?",
+      "ground_truth": "Yrityksen taseen loppusumma lasketaan summaamalla yhteen oma ja vieras pääoma, mikä tarkoittaa yritykseen sitoutunutta pääoman määrää.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mikä on taseen loppusumma?",
+      "ground_truth": "Taseen loppusumma tarkoittaa yritykseen sitoutunutta pääoman määrää, joka lasketaan summaamalla yhteen oma ja vieras pääoma.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mikä on hyvä taseen merkki?",
+      "ground_truth": "Hyvän taseen tunnusmerkki on oman pääoman positiivisuus, eli tilikauden ja edellisten tilikausien voittojen sekä oman pääoman sijoitusten summa ylittää vieraan pääoman määrän.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mikä on tilinpäätös ja mitä se sisältää?",
+      "ground_truth": "Tilinpäätös on tilikauden päättyessä laadittava laskelma, joka sisältää tuloslaskelman ja yrityksen taseen sekä tarvittavat liitetiedot, kuten rahoituslaskelman ja toimintakertomuksen.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 2
+      }
+    },
+    {
+      "question": "Milloin osakeyhtiön on toimitettava tilinpäätös Kaupparekisteriin?",
+      "ground_truth": "Osakeyhtiön on toimitettava tilinpäätös Kaupparekisteriin kahden kuukauden kuluessa tilinpäätöksen vahvistamisesta.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 2
+      }
+    },
+    {
+      "question": "Mikä on tilinpäätöksen laatimisen aikaraja osakeyhtiölle?",
+      "ground_truth": "Osakeyhtiön tilinpäätös on laadittava neljän kuukauden kuluttua tilikauden päättymisestä, ja se on vahvistettava yhtiökokouksessa puolen vuoden kuluessa tilikauden päättymisestä.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 2
+      }
+    },
+    {
+      "question": "Mitä tietoja tuloslaskelmassa esitetään?",
+      "ground_truth": "Tuloslaskelmassa esitetään yrityksen liikevaihto, liikevoitto, rahoituskulut- ja tuotot, tilinpäätössiirrot, tuloverot sekä poistot.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 2
+      }
+    },
+    {
+      "question": "Mitä tarkoittavat rahoituskulut tuloslaskelmassa ja mitkä ovat esimerkkejä niistä?",
+      "ground_truth": "Rahoituskulut tuloslaskelmassa ovat yrityksen korkokuluja, arvoalentumisia sekä muita rahoituskuluja liittyen pysyviin ja vaihtuviin vastaaviin. Esimerkkejä rahoituskuluista ovat korkokulut ja arvoalentumiset.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 2
+      }
+    },
+    {
+      "question": "Mikä on taseen vastaavaa-puoli ja mitä se sisältää?",
+      "ground_truth": "Taseen vastaavaa-puoli kertoo yrityksen varat eli sen mitä yritys omistaa, ja se jaetaan pysyviin ja vaihtuviin vastaaviin. Pysyviin vastaaviin kuuluvat esimerkiksi liikearvo, rakennukset ja koneet, kun taas vaihtuviin vastaaviin kuuluvat myyntisaamiset, rahavarat sekä vaihto-omaisuus.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "short_factual",
+        "num_chunks": 3
+      }
+    },
+    {
+      "question": "Miksi tuloslaskelma on tärkeä asiakirja toiminimiyrittäjälle erityisesti rahoitusta hakiessa?",
+      "ground_truth": "Tuloslaskelma on tärkeä asiakirja toiminimiyrittäjälle, koska se kertoo, miten yrityksen tulos on muodostunut tilikauden aikana. Se esittää yrityksen tulot ja kulut, mikä auttaa arvioimaan liiketoiminnan kannattavuutta. Rahoituslaitokset käyttävät tuloslaskelmaa arvioidessaan yrityksen kykyä maksaa lainaa, sillä se osoittaa yrityksen taloudellisen tilanteen ja kassavirran.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "reasoning",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Miten liikevoitto lasketaan tuloslaskelmassa ja miksi se on tärkeää?",
+      "ground_truth": "Liikevoitto lasketaan vähentämällä liikevaihdosta muuttuvat ja kiinteät kulut sekä poistot. Se on tärkeää, koska se kertoo yrityksen kannattavuudesta ennen korkoja, veroja, tilinpäätössiirtoja ja voitonjakoa. Liikevoitto auttaa ymmärtämään, kuinka hyvin yritys pystyy tuottamaan voittoa liiketoiminnastaan suhteessa sen kuluihin.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "reasoning",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Miten oikeiden ja riittävien palveluiden valinta vaikuttaa yrityksen rahaliikenteen hoitamiseen?",
+      "ground_truth": "Oikeat ja riittävät palvelut sujuvoittavat yrityksen rahaliikenteen hoitamista ja seuraamista. Tämä tarkoittaa, että valitsemalla sopivat palvelut, yrittäjät voivat tehdä laskutuksesta mahdollisimman helppoa ja tehokasta, mikä parantaa yrityksen taloudenhallintaa. Tällaiset palvelut tarjoavat myös käytännön apua arjen taloudenhallintaan, mikä on tärkeää yrityksen menestyksen kannalta.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "synthesis",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Miten tuloslaskelman eri osat, kuten liikevaihto, liikevoitto ja rahoituskulut- ja tuotot, vaikuttavat yrityksen taloudelliseen tulokseen?",
+      "ground_truth": "Tuloslaskelma koostuu useista osista, jotka yhdessä kuvaavat yrityksen taloudellista tilannetta. Liikevaihto edustaa yrityksen palveluiden ja tuotteiden myynnistä saatua tuottoa ennen veroja ja vähennyksiä, ja se on lähtökohta yrityksen kannattavuuden arvioimiselle. Liikevoitto puolestaan kertoo, miten hyvin yritys pystyy tuottamaan voittoa liiketoiminnastaan ennen korkoja ja veroja. Rahoituskulut- ja tuotot tulevat liikevoiton jälkeen ja ne vaikuttavat lopulliseen voittoon tai tappioon, joten nämä kolme osaa yhdessä luovat kokonaiskuvan yrityksen taloudellisesta tuloksesta. Tuloslaskelmassa myös tilikauden kulut ja verot vähennetään liikevaihdosta, mikä lopulta määrittelee tilikauden voiton tai tappion.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "synthesis",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mikä on tilinpäätöksen laatimisen merkitys yritykselle?",
+      "ground_truth": "Tilinpäätöksen laatiminen on tärkeää yritykselle, koska se tarvitaan veroilmoitusta tehdessä, veroilmoituksen liitteeksi, yritystoiminnan sopimuksia varten ja esimerkiksi hakiessaan rahoitusta.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "contact_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mitä asiakirjoja yrityksen tilinpäätös sisältää?",
+      "ground_truth": "Yrityksen tilinpäätös sisältää tuloslaskelman ja yrityksen taseen sekä tarvittavat tilinpäätöksen liitetiedot, kuten rahoituslaskelman, toimintakertomuksen ja kirjanpito- ja aineistoluettelon.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "contact_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mikä on tilinpäätöksen laatimisen aikaraja osakeyhtiölle?",
+      "ground_truth": "Osakeyhtiön tilinpäätös on laadittava neljän kuukauden kuluttua tilikauden päättymisestä.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "contact_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mitkä ovat toiminimiyrittäjän tilinpäätöksen tekemisen kynnysarvot?",
+      "ground_truth": "Tilinpäätöksen tekeminen muuttuu pakolliseksi toiminimelle, mikäli kaksi seuraavista rajoista ylittyy kahdella peräkkäisellä tilikaudella: 10 työntekijää, taseen loppusumma 450 000 euroa tai liikevaihto 900 000 euroa.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "contact_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Mikä on tuloslaskelman tarkoitus?",
+      "ground_truth": "Tuloslaskelman tarkoitus on kertoa, miten yrityksen tulos on muodostunut tilikauden aikana. Siitä selviää yrityksen tulot ja kulut, mukaan lukien liikevaihto, liikevoitto, rahoituskulut ja -tuotot, tilinpäätössiirrot sekä tuloverot.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "contact_factual",
+        "num_chunks": 1
+      }
+    },
+    {
+      "question": "Miten yrityksen taseen loppusumma lasketaan ja miksi se on tärkeä yrityksen taloudellisen tilanteen arvioinnissa?",
+      "ground_truth": "Yrityksen taseen loppusumma lasketaan summaamalla yhteen oma ja vieras pääoma. Tämä loppusumma tarkoittaa yritykseen sitoutunutta pääoman määrää, ja se on tärkeä, koska hyvä tase kertoo yrityksen maksukyvystä eli siitä, että yrityksen rahat, pankkisaamiset sekä lyhytaikaiset saamiset riittävät kattamaan lyhytaikaiset velat selvästi.",
+      "project": "nano_rag_evaluation",
+      "metadata": {
+        "question_type": "contact_factual",
+        "num_chunks": 2
+      }
+    }
+  ],
+  "metadata": {
+    "total_questions": 32,
+    "generation_time_seconds": 99.46105194091797,
+    "generation_time_formatted": "0:01:39",
+    "tokens_used": {
+      "input": 25204,
+      "output": 4120,
+      "total": 29324
+    },
+    "cost_estimate": {
+      "input_cost": 0.0037806,
+      "output_cost": 0.0024720000000000002,
+      "total_cost": 0.0062526000000000005,
+      "model": "gpt-4o-mini"
+    },
+    "configuration": {
+      "enable_single_chunk": true,
+      "enable_dual_chunk": true,
+      "enable_triple_chunk": true,
+      "enable_quad_chunk": true,
+      "enable_quint_chunk": true,
+      "enable_short_factual": true,
+      "enable_reasoning": true,
+      "enable_synthesis": true,
+      "enable_contact_factual": true,
+      "distribution": {
+        "short_factual": 60,
+        "reasoning": 10,
+        "synthesis": 10,
+        "contact_factual": 20
+      },
+      "chunk_distribution": {
+        "single": 60,
+        "dual": 20,
+        "triple": 5,
+        "quad": 2,
+        "quint": 1
+      }
+    }
+  }
+}

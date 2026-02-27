@@ -30,7 +30,7 @@ if not (project_root / "studio").exists():
     project_root = script_dir
 
 # 1️⃣ Lue liitetiedosto projektin juuresta
-REPORT_PATH = project_root / "studio" / "testresults" / "tr_mix_20260210_105930.md"
+REPORT_PATH = project_root / "studio" / "testresults" / "tr_mix_20260212_084731.md"
 
 if not REPORT_PATH.exists():
     raise FileNotFoundError(f"Raporttitiedostoa ei löydy: {REPORT_PATH}")

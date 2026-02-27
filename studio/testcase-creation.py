@@ -18,7 +18,7 @@ if not api_key:
 client = OpenAI(api_key=api_key)
 
 # vektorit josta testicaset genetoidaan
-INPUT_FILE = "data/nano2/rag_storage/vdb_chunks.json"
+INPUT_FILE = "data/nano3/rag_storage/vdb_chunks.json"
 
 # Token-hinnat (USD per 1M tokenia) - päivitetty 2024
 TOKEN_PRICES = {
@@ -52,10 +52,10 @@ ENABLE_CONTACT_FACTUAL = True   # Yhteystietokysymykset (kuka, missä, yhteystie
 # Kysymysten jakauma (prosentit, yhteensä 100%)
 # Määrittää kuinka monta prosenttia kysymyksistä on mitäkin tyyppiä
 DISTRIBUTION = {
-    "short_factual": 70,     # Lyhyitä täsmäkysymyksiä
-    "reasoning": 4,         # Päättelykysymyksiä
-    "synthesis": 2,         # Yhdistelmäkysymyksiä
-    "contact_factual": 24,   # Yhteystietokysymyksiä
+    "short_factual": 60,     # Lyhyitä täsmäkysymyksiä
+    "reasoning": 10,         # Päättelykysymyksiä
+    "synthesis": 10,         # Yhdistelmäkysymyksiä
+    "contact_factual": 20,   # Yhteystietokysymyksiä
 }
 
 # Chunk-määrien jakauma (prosentit per chunk-tyyppi)
@@ -69,7 +69,7 @@ CHUNK_DISTRIBUTION = {
 }
 
 # Kokonaismäärä generoitavia kysymyksiä
-TOTAL_QUESTIONS = 22
+TOTAL_QUESTIONS = 40
 
 # OUTPUT_FILE luodaan dynaamisesti timestampilla myöhemmin
 

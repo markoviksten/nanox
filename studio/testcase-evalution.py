@@ -23,10 +23,10 @@ if not OPENAI_API_KEY:
     raise ValueError("LLM_BINDING_API_KEY ei löydy .env-tiedostosta!")
 
 # Testitiedosto (polku projektin juuresta)
-TEST_FILE = "studio/testcases/tc_20260210_105014.json"
+TEST_FILE = "studio/testcases/tc_20260212_083350.json"
 
 # LightRAG API asetukset
-LIGHTRAG_ENDPOINT = "http://localhost:9622"
+LIGHTRAG_ENDPOINT = "http://localhost:9623"
 # JWT Bearer token (pitkä eyJhbG... alkava token)
 #LIGHTRAG_JWT_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc2OTc1ODA1MCwicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.5DhRVY4mCM7w494PLiFsSn70u_M4yLYUx6oux8CPsGc"
 LIGHTRAG_JWT_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6NDkyMzgxMzIzMCwicm9sZSI6InVzZXIiLCJtZXRhZGF0YSI6eyJhdXRoX21vZGUiOiJlbmFibGVkIn19.0BTuVkGRO2wljpwiZoKmob22_Z7FiIj0VdqgPsKMHh4"

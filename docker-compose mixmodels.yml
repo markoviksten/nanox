@@ -182,9 +182,9 @@ services:
       - ./data/nano6/rag_storage:/app/data/rag_storage
       - ./data/nano6/inputs:/app/data/inputs
       - ./config.ini:/app/config.ini
-      - ./.env1oaie:/app/.env
+      - ./.env2wxoaai:/app/.env
     env_file: 
-      - .env1oaie
+      - .env2wxoaai
     environment:
       - INSTANCE_ID=nano-6
     restart: unless-stopped
