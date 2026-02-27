@@ -1,0 +1,389 @@
+{
+  "test_cases": [
+    {
+      "question": "Miten yrityksen tuloslaskelman eri osat yhdessä heijastavat sen taloudellista terveyttä?",
+      "metadata": {
+        "user_id": 1,
+        "user_description": "Liiketoiminnan omistaja, joka haluaa ymmärtää yrityksensä taloudellista tilaa.",
+        "task_id": 1,
+        "task_description": "Analysoi yrityksen taloudellista suorituskykyä.",
+        "question_index": 1,
+        "method": "edge_et_al_2024"
+      }
+    },
+    {
+      "question": "Miten taseen ja tuloslaskelman tiedot yhdessä auttavat arvioimaan yrityksen kasvupotentiaalia?",
+      "metadata": {
+        "user_id": 1,
+        "user_description": "Liiketoiminnan omistaja, joka haluaa ymmärtää yrityksensä taloudellista tilaa.",
+        "task_id": 1,
+        "task_description": "Analysoi yrityksen taloudellista suorituskykyä.",
+        "question_index": 2,
+        "method": "edge_et_al_2024"
+      }
+    },
+    {
+      "question": "Miten voit yhdistää taseen ja tuloslaskelman tiedot saadaksesi kokonaiskuvan yrityksen varoista ja veloista?",
+      "metadata": {
+        "user_id": 1,
+        "user_description": "Liiketoiminnan omistaja, joka haluaa ymmärtää yrityksensä taloudellista tilaa.",
+        "task_id": 1,
+        "task_description": "Analysoi yrityksen taloudellista suorituskykyä.",
+        "question_index": 3,
+        "method": "edge_et_al_2024"
+      }
+    },
+    {
+      "question": "Miten vuosittaiset taloudelliset raportit vaikuttavat liiketoimintapäätöksiisi?",
+      "metadata": {
+        "user_id": 1,
+        "user_description": "Liiketoiminnan omistaja, joka haluaa ymmärtää yrityksensä taloudellista tilaa.",
+        "task_id": 1,
+        "task_description": "Analysoi yrityksen taloudellista suorituskykyä.",
+        "question_index": 4,
+        "method": "edge_et_al_2024"
+      }
+    },
+    {
+      "question": "Miten eri komponentit tuloslaskelmassa korreloivat yrityksen pitkäaikaisen taloudellisen menestyksen kanssa?",
+      "metadata": {
+        "user_id": 1,
+        "user_description": "Liiketoiminnan omistaja, joka haluaa ymmärtää yrityksensä taloudellista tilaa.",
+        "task_id": 1,
+        "task_description": "Analysoi yrityksen taloudellista suorituskykyä.",
+        "question_index": 5,
+        "method": "edge_et_al_2024"
+      }
+    },
+    {
+      "question": "Miten varmistat, että asiakkaan tuloslaskelma täyttää kaikki vaatimukset ja standardit?",
+      "metadata": {
+        "user_id": 2,
+        "user_description": "Kirjanpitäjä, joka valmistaa vuosittaisia tilinpäätöksiä asiakkailleen.",
+        "task_id": 1,
+        "task_description": "Laadi tarkkoja tuloslaskelmia asiakkaille.",
+        "question_index": 1,
+        "method": "edge_et_al_2024"
+      }
+    },
+    {
+      "question": "Miten voit käyttää taseen tietoja parantaaksesi asiakkaan tuloslaskelmaa?",
+      "metadata": {
+        "user_id": 2,
+        "user_description": "Kirjanpitäjä, joka valmistaa vuosittaisia tilinpäätöksiä asiakkailleen.",
+        "task_id": 1,
+        "task_description": "Laadi tarkkoja tuloslaskelmia asiakkaille.",
+        "question_index": 2,
+        "method": "edge_et_al_2024"
+      }
+    },
+    {
+      "question": "Miten eri tuloslaskelman osat vaikuttavat asiakkaan verotettaviin tuloihin?",
+      "metadata": {
+        "user_id": 2,
+        "user_description": "Kirjanpitäjä, joka valmistaa vuosittaisia tilinpäätöksiä asiakkailleen.",
+        "task_id": 1,
+        "task_description": "Laadi tarkkoja tuloslaskelmia asiakkaille.",
+        "question_index": 3,
+        "method": "edge_et_al_2024"
+      }
+    },
+    {
+      "question": "Miten tuloslaskelman analyysi auttaa asiakasta ymmärtämään liiketoimintansa riskit ja mahdollisuudet?",
+      "metadata": {
+        "user_id": 2,
+        "user_description": "Kirjanpitäjä, joka valmistaa vuosittaisia tilinpäätöksiä asiakkailleen.",
+        "task_id": 1,
+        "task_description": "Laadi tarkkoja tuloslaskelmia asiakkaille.",
+        "question_index": 4,
+        "method": "edge_et_al_2024"
+      }
+    },
+    {
+      "question": "Miten yhdistät asiakkaan taloudelliset tiedot ja toimialan trendit tuloslaskelman laatimisessa?",
+      "metadata": {
+        "user_id": 2,
+        "user_description": "Kirjanpitäjä, joka valmistaa vuosittaisia tilinpäätöksiä asiakkailleen.",
+        "task_id": 1,
+        "task_description": "Laadi tarkkoja tuloslaskelmia asiakkaille.",
+        "question_index": 5,
+        "method": "edge_et_al_2024"
+      }
+    },
+    {
+      "question": "Miten voit vertailla eri yritysten tuloslaskelmia ja taseita saadaksesi syvemmän ymmärryksen toimialan tilasta?",
+      "metadata": {
+        "user_id": 3,
+        "user_description": "Taloudellinen analyytikko, joka arvioi yritysten taloudellista suorituskykyä.",
+        "task_id": 1,
+        "task_description": "Tee vertailuanalyysejä eri yritysten välillä.",
+        "question_index": 1,
+        "method": "edge_et_al_2024"
+      }
+    },
+    {
+      "question": "Miten taloudelliset mittarit eri yrityksiltä voivat vaikuttaa päätöksentekoon sijoitusstrategiassa?",
+      "metadata": {
+        "user_id": 3,
+        "user_description": "Taloudellinen analyytikko, joka arvioi yritysten taloudellista suorituskykyä.",
+        "task_id": 1,
+        "task_description": "Tee vertailuanalyysejä eri yritysten välillä.",
+        "question_index": 2,
+        "method": "edge_et_al_2024"
+      }
+    },
+    {
+      "question": "Miten eri yritysten taloudelliset tiedot auttavat sinua tunnistamaan markkinatrendejä?",
+      "metadata": {
+        "user_id": 3,
+        "user_description": "Taloudellinen analyytikko, joka arvioi yritysten taloudellista suorituskykyä.",
+        "task_id": 1,
+        "task_description": "Tee vertailuanalyysejä eri yritysten välillä.",
+        "question_index": 3,
+        "method": "edge_et_al_2024"
+      }
+    },
+    {
+      "question": "Miten voit yhdistää tietoa vuosittaisista taloudellisista raportista ja toimialan keskiarvoista?",
+      "metadata": {
+        "user_id": 3,
+        "user_description": "Taloudellinen analyytikko, joka arvioi yritysten taloudellista suorituskykyä.",
+        "task_id": 1,
+        "task_description": "Tee vertailuanalyysejä eri yritysten välillä.",
+        "question_index": 4,
+        "method": "edge_et_al_2024"
+      }
+    },
+    {
+      "question": "Miten analysoit yrityksen taloudellista tilaa ottaen huomioon markkinoiden kilpailutilanteen?",
+      "metadata": {
+        "user_id": 3,
+        "user_description": "Taloudellinen analyytikko, joka arvioi yritysten taloudellista suorituskykyä.",
+        "task_id": 1,
+        "task_description": "Tee vertailuanalyysejä eri yritysten välillä.",
+        "question_index": 5,
+        "method": "edge_et_al_2024"
+      }
+    },
+    {
+      "question": "Miten tuloslaskelman ja taseen analyysi voi muuttaa asiakkaan sijoitusvalintoja?",
+      "metadata": {
+        "user_id": 4,
+        "user_description": "Rahoitusalan asiantuntija, joka neuvoo asiakkaita investoinneissa.",
+        "task_id": 1,
+        "task_description": "Arvioi asiakkaan sijoitusmahdollisuuksia.",
+        "question_index": 1,
+        "method": "edge_et_al_2024"
+      }
+    },
+    {
+      "question": "Miten eri komponentit taseessa vaikuttavat asiakkaan riskiprofiiliin ja sijoitusstrategiaan?",
+      "metadata": {
+        "user_id": 4,
+        "user_description": "Rahoitusalan asiantuntija, joka neuvoo asiakkaita investoinneissa.",
+        "task_id": 1,
+        "task_description": "Arvioi asiakkaan sijoitusmahdollisuuksia.",
+        "question_index": 2,
+        "method": "edge_et_al_2024"
+      }
+    },
+    {
+      "question": "Miten voit käyttää taloudellisia raportteja arvioidaksesi yrityksen tulevaisuuden tuotto-odotuksia?",
+      "metadata": {
+        "user_id": 4,
+        "user_description": "Rahoitusalan asiantuntija, joka neuvoo asiakkaita investoinneissa.",
+        "task_id": 1,
+        "task_description": "Arvioi asiakkaan sijoitusmahdollisuuksia.",
+        "question_index": 3,
+        "method": "edge_et_al_2024"
+      }
+    },
+    {
+      "question": "Miten eri yritysten vuosittaiset raportit auttavat sinua neuvomaan asiakkaita tehokkaasti?",
+      "metadata": {
+        "user_id": 4,
+        "user_description": "Rahoitusalan asiantuntija, joka neuvoo asiakkaita investoinneissa.",
+        "task_id": 1,
+        "task_description": "Arvioi asiakkaan sijoitusmahdollisuuksia.",
+        "question_index": 4,
+        "method": "edge_et_al_2024"
+      }
+    },
+    {
+      "question": "Miten markkinatrendit ja yrityksen taloudelliset tiedot yhdessä vaikuttavat asiakkaan päätöksiin?",
+      "metadata": {
+        "user_id": 4,
+        "user_description": "Rahoitusalan asiantuntija, joka neuvoo asiakkaita investoinneissa.",
+        "task_id": 1,
+        "task_description": "Arvioi asiakkaan sijoitusmahdollisuuksia.",
+        "question_index": 5,
+        "method": "edge_et_al_2024"
+      }
+    },
+    {
+      "question": "Miten tuloslaskelman ja taseen eri osat yhdessä auttavat ymmärtämään taloushallinnan perusteita?",
+      "metadata": {
+        "user_id": 5,
+        "user_description": "Opiskelija, joka tutkii taloushallintoa ja kirjanpitoa.",
+        "task_id": 1,
+        "task_description": "Tutki ja analysoi talousraportointia.",
+        "question_index": 1,
+        "method": "edge_et_al_2024"
+      }
+    },
+    {
+      "question": "Miten voit käyttää tätä datasettiä arvioidaksesi eri yritysten taloudellisia käytäntöjä?",
+      "metadata": {
+        "user_id": 5,
+        "user_description": "Opiskelija, joka tutkii taloushallintoa ja kirjanpitoa.",
+        "task_id": 1,
+        "task_description": "Tutki ja analysoi talousraportointia.",
+        "question_index": 2,
+        "method": "edge_et_al_2024"
+      }
+    },
+    {
+      "question": "Miten eri osastojen välinen yhteistyö taloustietojen laatimisessa näkyy vuosittaisissa raporteissa?",
+      "metadata": {
+        "user_id": 5,
+        "user_description": "Opiskelija, joka tutkii taloushallintoa ja kirjanpitoa.",
+        "task_id": 1,
+        "task_description": "Tutki ja analysoi talousraportointia.",
+        "question_index": 3,
+        "method": "edge_et_al_2024"
+      }
+    },
+    {
+      "question": "Miten taloudellisten raporttien analysointi voi parantaa ymmärrystäsi yrityksen arvonmäärityksestä?",
+      "metadata": {
+        "user_id": 5,
+        "user_description": "Opiskelija, joka tutkii taloushallintoa ja kirjanpitoa.",
+        "task_id": 1,
+        "task_description": "Tutki ja analysoi talousraportointia.",
+        "question_index": 4,
+        "method": "edge_et_al_2024"
+      }
+    },
+    {
+      "question": "Miten eri taloudellisten mittarien yhdistäminen voi auttaa sinua rakentamaan kokonaiskuvan yrityksen taloudellisesta tilanteesta?",
+      "metadata": {
+        "user_id": 5,
+        "user_description": "Opiskelija, joka tutkii taloushallintoa ja kirjanpitoa.",
+        "task_id": 1,
+        "task_description": "Tutki ja analysoi talousraportointia.",
+        "question_index": 5,
+        "method": "edge_et_al_2024"
+      }
+    }
+  ],
+  "metadata": {
+    "method": "edge_et_al_2024_graphrag",
+    "dataset_description": "The dataset covers the domain of corporate financial reporting, specifically focusing on the Finnish accounting practices related to annual financial statements, including income statements (tuloslaskelma) and balance sheets (tase). It contains information on the requirements for preparing these documents, their components, and their significance in assessing a company's financial health. This dataset is typically used by business owners, accountants, and financial analysts to understand a company's financial performance, compliance with legal obligations, and to make informed decisions regarding financing and operations.",
+    "total_questions": 25,
+    "num_users": 5,
+    "num_tasks_per_user": 5,
+    "num_questions_per_task": 5,
+    "generation_time_seconds": 28.735671997070312,
+    "generation_time_formatted": "0:00:28",
+    "tokens_used": {
+      "input": 3996,
+      "output": 1243,
+      "total": 5239
+    },
+    "cost_estimate": {
+      "input_cost": 0.0005994,
+      "output_cost": 0.0007457999999999999,
+      "total_cost": 0.0013452,
+      "model": "gpt-4o-mini"
+    },
+    "structure": {
+      "users": [
+        {
+          "user_id": 1,
+          "description": "Liiketoiminnan omistaja, joka haluaa ymmärtää yrityksensä taloudellista tilaa.",
+          "tasks": [
+            {
+              "task_id": 1,
+              "description": "Analysoi yrityksen taloudellista suorituskykyä.",
+              "questions": [
+                "Miten yrityksen tuloslaskelman eri osat yhdessä heijastavat sen taloudellista terveyttä?",
+                "Miten taseen ja tuloslaskelman tiedot yhdessä auttavat arvioimaan yrityksen kasvupotentiaalia?",
+                "Miten voit yhdistää taseen ja tuloslaskelman tiedot saadaksesi kokonaiskuvan yrityksen varoista ja veloista?",
+                "Miten vuosittaiset taloudelliset raportit vaikuttavat liiketoimintapäätöksiisi?",
+                "Miten eri komponentit tuloslaskelmassa korreloivat yrityksen pitkäaikaisen taloudellisen menestyksen kanssa?"
+              ]
+            }
+          ]
+        },
+        {
+          "user_id": 2,
+          "description": "Kirjanpitäjä, joka valmistaa vuosittaisia tilinpäätöksiä asiakkailleen.",
+          "tasks": [
+            {
+              "task_id": 1,
+              "description": "Laadi tarkkoja tuloslaskelmia asiakkaille.",
+              "questions": [
+                "Miten varmistat, että asiakkaan tuloslaskelma täyttää kaikki vaatimukset ja standardit?",
+                "Miten voit käyttää taseen tietoja parantaaksesi asiakkaan tuloslaskelmaa?",
+                "Miten eri tuloslaskelman osat vaikuttavat asiakkaan verotettaviin tuloihin?",
+                "Miten tuloslaskelman analyysi auttaa asiakasta ymmärtämään liiketoimintansa riskit ja mahdollisuudet?",
+                "Miten yhdistät asiakkaan taloudelliset tiedot ja toimialan trendit tuloslaskelman laatimisessa?"
+              ]
+            }
+          ]
+        },
+        {
+          "user_id": 3,
+          "description": "Taloudellinen analyytikko, joka arvioi yritysten taloudellista suorituskykyä.",
+          "tasks": [
+            {
+              "task_id": 1,
+              "description": "Tee vertailuanalyysejä eri yritysten välillä.",
+              "questions": [
+                "Miten voit vertailla eri yritysten tuloslaskelmia ja taseita saadaksesi syvemmän ymmärryksen toimialan tilasta?",
+                "Miten taloudelliset mittarit eri yrityksiltä voivat vaikuttaa päätöksentekoon sijoitusstrategiassa?",
+                "Miten eri yritysten taloudelliset tiedot auttavat sinua tunnistamaan markkinatrendejä?",
+                "Miten voit yhdistää tietoa vuosittaisista taloudellisista raportista ja toimialan keskiarvoista?",
+                "Miten analysoit yrityksen taloudellista tilaa ottaen huomioon markkinoiden kilpailutilanteen?"
+              ]
+            }
+          ]
+        },
+        {
+          "user_id": 4,
+          "description": "Rahoitusalan asiantuntija, joka neuvoo asiakkaita investoinneissa.",
+          "tasks": [
+            {
+              "task_id": 1,
+              "description": "Arvioi asiakkaan sijoitusmahdollisuuksia.",
+              "questions": [
+                "Miten tuloslaskelman ja taseen analyysi voi muuttaa asiakkaan sijoitusvalintoja?",
+                "Miten eri komponentit taseessa vaikuttavat asiakkaan riskiprofiiliin ja sijoitusstrategiaan?",
+                "Miten voit käyttää taloudellisia raportteja arvioidaksesi yrityksen tulevaisuuden tuotto-odotuksia?",
+                "Miten eri yritysten vuosittaiset raportit auttavat sinua neuvomaan asiakkaita tehokkaasti?",
+                "Miten markkinatrendit ja yrityksen taloudelliset tiedot yhdessä vaikuttavat asiakkaan päätöksiin?"
+              ]
+            }
+          ]
+        },
+        {
+          "user_id": 5,
+          "description": "Opiskelija, joka tutkii taloushallintoa ja kirjanpitoa.",
+          "tasks": [
+            {
+              "task_id": 1,
+              "description": "Tutki ja analysoi talousraportointia.",
+              "questions": [
+                "Miten tuloslaskelman ja taseen eri osat yhdessä auttavat ymmärtämään taloushallinnan perusteita?",
+                "Miten voit käyttää tätä datasettiä arvioidaksesi eri yritysten taloudellisia käytäntöjä?",
+                "Miten eri osastojen välinen yhteistyö taloustietojen laatimisessa näkyy vuosittaisissa raporteissa?",
+                "Miten taloudellisten raporttien analysointi voi parantaa ymmärrystäsi yrityksen arvonmäärityksestä?",
+                "Miten eri taloudellisten mittarien yhdistäminen voi auttaa sinua rakentamaan kokonaiskuvan yrityksen taloudellisesta tilanteesta?"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
